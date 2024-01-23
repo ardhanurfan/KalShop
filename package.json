@@ -1,0 +1,50 @@
+{
+  "name": "cdt-vuexy-template",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "prepare": "husky install",
+    "depcheck": "nextweb depcheck --prefer-wanted",
+    "clean": "nextweb clean",
+    "build": "cross-env NODE_ENV=production nextweb build",
+    "start": "nextweb start",
+    "test": "nextweb test",
+    "lint": "nextweb lint",
+    "help": "nextweb help",
+    "config": "nextweb config"
+  },
+  "devDependencies": {
+    "@nxweb/builder": "3.6.0-rc.34",
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.5.4",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.47.0",
+    "husky": "^8.0.0",
+    "jest": "^29.6.3",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.22.10",
+    "@casl/ability": "^6.5.0",
+    "@casl/react": "^3.1.0",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.1",
+    "@mui/material": "^5.14.5",
+    "@mui/utils": "^5.14.5",
+    "@nxweb/auth": "3.6.0-rc.15",
+    "@nxweb/core": "3.6.0-rc.32",
+    "@nxweb/icons": "3.6.0-rc.27",
+    "@nxweb/react": "3.6.0-rc.6",
+    "@nxweb/react-bootstrap": "3.6.0-rc.0",
+    "hoist-non-react-statics": "^3.3.2",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.8.0",
+    "react-dom": "^18.2.0",
+    "react-popper": "^2.3.0",
+    "react-router-dom": "^6.15.0",
+    "stylis-plugin-rtl": "^2.1.1"
+  }
+}
