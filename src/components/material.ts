@@ -38,6 +38,7 @@ import { default as RadioGroupComponent } from '@mui/material/RadioGroup';
 import { default as StackComponent } from '@mui/material/Stack';
 import { default as SwipeableDrawerComponent } from '@mui/material/SwipeableDrawer';
 import { default as SwitchComponent } from '@mui/material/Switch';
+import { default as TextFieldComponent } from '@mui/material/TextField';
 import { default as ToolbarComponent } from '@mui/material/Toolbar';
 import { default as TypographyComponent } from '@mui/material/Typography';
 import { default as ZoomComponent } from '@mui/material/Zoom';
@@ -81,6 +82,7 @@ import type { RadioGroupProps } from '@mui/material/RadioGroup';
 import type { StackProps } from '@mui/material/Stack';
 import type { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer';
 import type { SwitchProps } from '@mui/material/Switch';
+import type { TextFieldProps } from '@mui/material/TextField';
 import type { ToolbarProps } from '@mui/material/Toolbar';
 import type { TypographyProps } from '@mui/material/Typography';
 import type { ZoomProps } from '@mui/material/Zoom';
@@ -128,6 +130,7 @@ const RadioGroup = RadioGroupComponent as unknown as typeof RadioGroupComponent.
 const Stack = StackComponent as unknown as typeof StackComponent.default;
 const SwipeableDrawer = SwipeableDrawerComponent as unknown as typeof SwipeableDrawerComponent.default;
 const Switch = SwitchComponent as unknown as typeof SwitchComponent.default;
+const TextField = TextFieldComponent as unknown as typeof TextFieldComponent.default;
 const Toolbar = ToolbarComponent as unknown as typeof ToolbarComponent.default;
 const Typography = TypographyComponent as unknown as typeof TypographyComponent.default;
 const Zoom = ZoomComponent as unknown as typeof ZoomComponent.default;
@@ -135,7 +138,6 @@ const useMediaQuery = useMediaQueryHook as unknown as typeof useMediaQueryHook.d
 const useScrollTrigger = useScrollTriggerHook as unknown as typeof useScrollTriggerHook.default;
 
 export {
-  createTheme, responsiveFontSizes, styled, ThemeProvider, useTheme,
   Alert,
   AppBar,
   Avatar,
@@ -170,14 +172,9 @@ export {
   Paper,
   Radio,
   RadioGroup,
-  Stack,
-  Switch,
-  SwipeableDrawer,
-  Toolbar,
-  Typography,
-  useMediaQuery,
-  useScrollTrigger,
-  Zoom
+  Stack, SwipeableDrawer, Switch, TextField, ThemeProvider, Toolbar,
+  Typography, Zoom, createTheme, responsiveFontSizes, styled, useMediaQuery,
+  useScrollTrigger, useTheme
 };
 
 export type {
@@ -217,6 +214,7 @@ export type {
   StackProps,
   SwipeableDrawerProps,
   SwitchProps,
+  TextFieldProps,
   ToolbarProps,
   TypographyProps,
   Direction,
