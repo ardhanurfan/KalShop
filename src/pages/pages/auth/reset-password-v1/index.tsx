@@ -50,10 +50,10 @@ const LinkStyled = styled(Link)(({ theme }) => ({
 const ResetPasswordV1 = () => {
   // ** States
   const [values, setValues] = useState<State>({
-    newPassword: '',
-    showNewPassword: false,
     confirmNewPassword: '',
-    showConfirmNewPassword: false
+    newPassword: '',
+    showConfirmNewPassword: false,
+    showNewPassword: false
   });
 
   // ** Hook
@@ -80,7 +80,7 @@ const ResetPasswordV1 = () => {
       <AuthIllustrationV1Wrapper>
         <Card>
           <CardContent sx={{ p: (theme) => `${theme.spacing(10.5, 8, 8)} !important` }}>
-            <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', mb: 8 }}>
               <svg fill="none" viewBox="0 0 32 22" width={34} xmlns="http://www.w3.org/2000/svg">
                 <path
                   clipRule="evenodd"
@@ -105,7 +105,7 @@ const ResetPasswordV1 = () => {
                   fill={theme.palette.primary.main}
                   fillRule="evenodd" />
               </svg>
-              <Typography sx={{ ml: 2.5, fontWeight: 700 }} variant="h3">
+              <Typography sx={{ fontWeight: 700, ml: 2.5 }} variant="h3">
                 {themeConfig.templateName}
               </Typography>
             </Box>
@@ -115,7 +115,7 @@ const ResetPasswordV1 = () => {
               </Typography>
               <Typography sx={{ display: 'flex' }}>
                 for{' '}
-                <Typography component="span" sx={{ ml: 1, fontWeight: 500 }}>
+                <Typography component="span" sx={{ fontWeight: 500, ml: 1 }}>
                   john.doe@email.com
                 </Typography>
               </Typography>
@@ -171,7 +171,7 @@ const ResetPasswordV1 = () => {
               <Button fullWidth={true} sx={{ mb: 4 }} type="submit" variant="contained">
                 Set New Password
               </Button>
-              <Typography sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', '& svg': { mr: 1 } }}>
+              <Typography sx={{ '& svg': { mr: 1 }, alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
                 <Typography component={LinkStyled} to="/pages/auth/login-v1">
                   <ChevronLeft />
                   <span>Back to login</span>
@@ -186,5 +186,5 @@ const ResetPasswordV1 = () => {
 };
 
 ResetPasswordV1.layout = 'blank';
-
+ResetPasswordV1.displayName = 'ResetPasswordV1';
 export default ResetPasswordV1;
