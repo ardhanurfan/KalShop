@@ -148,5 +148,5 @@ const ForgotPasswordV1 = () => {
 };
 
 ForgotPasswordV1.layout = "blank";
-
+ForgotPasswordV1.displayName = "ForgotPasswordV1";
 export default ForgotPasswordV1;
