@@ -1,6 +1,3 @@
-// ** React Imports
-import { ReactNode } from "react";
-
 // ** Link Import
 import { Link } from 'react-router-dom';
 
