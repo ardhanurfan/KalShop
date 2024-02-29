@@ -126,4 +126,5 @@ const VerifyEmailV1 = () => {
 };
 
 VerifyEmailV1.layout = 'blank';
+VerifyEmailV1.displayName = 'VerifyEmailV1';
 export default VerifyEmailV1;
