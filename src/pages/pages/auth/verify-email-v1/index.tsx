@@ -2,13 +2,12 @@
 import { Link } from 'react-router-dom';
 
 // ** MUI Components
-import type { CardProps, FormControlLabelProps } from '@components/material.js';
+import type { CardProps } from '@components/material.js';
 import {
   Box,
   Button,
   CardContent,
   Card as MuiCard,
-  FormControlLabel as MuiFormControlLabel,
   styled,
   Typography,
   useTheme
