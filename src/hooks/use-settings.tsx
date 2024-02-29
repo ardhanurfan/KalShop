@@ -1,9 +1,24 @@
 import type { FC, ReactNode } from 'react';
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react';
 
 import type { Direction } from '@components/material.js';
 import { config as themeConfig } from '@config/theme.js';
-import type { AppBar, ContentWidth, Footer, Mode, Skin, ThemeColor, VerticalNavToggle } from '@layouts/types.js';
+import type {
+  AppBar,
+  ContentWidth,
+  Footer,
+  Mode,
+  Skin,
+  ThemeColor,
+  VerticalNavToggle
+} from '@layouts/types.js';
 
 interface Settings {
   appBar?: AppBar
@@ -18,7 +33,13 @@ interface Settings {
   navHidden?: boolean // Navigation menu
   skin: Skin
   themeColor: ThemeColor
-  toastPosition?: 'bottom-center' | 'bottom-left' | 'bottom-right' | 'top-center' | 'top-left' | 'top-right'
+  toastPosition?:
+  | 'bottom-center'
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'top-center'
+  | 'top-left'
+  | 'top-right'
   verticalNavToggleType: VerticalNavToggle
 }
 
@@ -30,7 +51,10 @@ interface SettingsContextValue {
 }
 
 const initialSettings: Settings = {
-  appBar: themeConfig.layout === 'horizontal' && themeConfig.appBar === 'hidden' ? 'fixed' : themeConfig.appBar,
+  appBar:
+    themeConfig.layout === 'horizontal' && themeConfig.appBar === 'hidden'
+      ? 'fixed'
+      : themeConfig.appBar,
   appBarBlur: themeConfig.appBarBlur,
   contentWidth: themeConfig.contentWidth,
   direction: themeConfig.direction,
@@ -68,7 +92,8 @@ interface SettingsProviderProps {
 }
 
 const restoreSettings = (): Settings | null => {
-  let settings = null;
+  // let settings = null;
+  let settings: Settings | null = null;
 
   try {
     const storedData: string | null = window.localStorage.getItem('settings');
@@ -143,7 +168,7 @@ const SettingsProvider: FC<SettingsProviderProps> = ({
 
   return (
     <SettingsContext.Provider value={value}>
-    {children}
+      {children}
     </SettingsContext.Provider>
   );
 };
