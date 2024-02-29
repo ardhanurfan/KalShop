@@ -41,16 +41,16 @@ const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
 }));
 
 const LinkStyled = styled(Link)(({ theme }) => ({
-  textDecoration: 'none',
-  color: `${theme.palette.primary.main} !important`
+  color: `${theme.palette.primary.main} !important`,
+  textDecoration: 'none'
 }));
 
 const FormControlLabel = styled(MuiFormControlLabel)<FormControlLabelProps>(({ theme }) => ({
-  marginTop: theme.spacing(1.5),
-  marginBottom: theme.spacing(1.75),
   '& .MuiFormControlLabel-label': {
     color: theme.palette.text.secondary
-  }
+  },
+  marginBottom: theme.spacing(1.75),
+  marginTop: theme.spacing(1.5)
 }));
 
 const RegisterV1 = () => {
@@ -75,7 +75,7 @@ const RegisterV1 = () => {
       <AuthIllustrationV1Wrapper>
         <Card>
           <CardContent sx={{ p: (theme) => `${theme.spacing(10.5, 8, 8)} !important` }}>
-            <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', mb: 8 }}>
               <svg fill="none" viewBox="0 0 32 22" width={34} xmlns="http://www.w3.org/2000/svg">
                 <path
                   clipRule="evenodd"
@@ -100,7 +100,7 @@ const RegisterV1 = () => {
                   fill={theme.palette.primary.main}
                   fillRule="evenodd" />
               </svg>
-              <Typography sx={{ ml: 2.5, fontWeight: 700 }} variant="h3">
+              <Typography sx={{ fontWeight: 700, ml: 2.5 }} variant="h3">
                 {themeConfig.templateName}
               </Typography>
             </Box>
@@ -144,7 +144,7 @@ const RegisterV1 = () => {
               <FormControlLabel
                 control={<Checkbox />}
                 label={
-                  <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+                  <Box sx={{ alignItems: 'center', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                     <Typography sx={{ color: 'text.secondary' }}>I agree to </Typography>
                     <Typography component={LinkStyled} sx={{ ml: 1 }} to="/" onClick={(e) => e.preventDefault()}>
                       privacy policy & terms
@@ -154,7 +154,7 @@ const RegisterV1 = () => {
               <Button fullWidth={true} sx={{ mb: 4 }} type="submit" variant="contained">
                 Sign up
               </Button>
-              <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <Box sx={{ alignItems: 'center', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 <Typography sx={{ color: 'text.secondary', mr: 2 }}>Already have an account?</Typography>
                 <Typography
                   component={LinkStyled}
@@ -166,15 +166,15 @@ const RegisterV1 = () => {
               </Box>
               <Divider
                 sx={{
-                  color: 'text.disabled',
                   '& .MuiDivider-wrapper': { px: 6 },
+                  color: 'text.disabled',
                   fontSize: theme.typography.body2.fontSize,
                   my: (theme) => `${theme.spacing(6)} !important`
                 }}
               >
                 or
               </Divider>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
                 <IconButton component={Link} sx={{ color: '#497ce2' }} to="/" onClick={(e) => e.preventDefault()}>
                   <BrandFacebook />
                 </IconButton>
@@ -202,5 +202,7 @@ const RegisterV1 = () => {
 };
 
 RegisterV1.layout = 'blank';
+
+RegisterV1.displayName = 'RegisterV1';
 
 export default RegisterV1;
