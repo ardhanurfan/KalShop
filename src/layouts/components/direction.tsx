@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 
-import { default as stylisRTLPluginDefault } from 'stylis-plugin-rtl';
+import { default as stylisRTLPlugin } from 'stylis-plugin-rtl';
 
 import type { Direction as DirectionType } from '@components/material.js';
 
@@ -12,8 +12,6 @@ interface DirectionProps {
   readonly children: ReactNode
   readonly direction: DirectionType
 }
-
-const stylisRTLPlugin = stylisRTLPluginDefault as unknown as typeof stylisRTLPluginDefault.default;
 
 const styleCache = () => createCache({
   key: 'rtl',

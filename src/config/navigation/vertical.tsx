@@ -11,9 +11,9 @@ export const navigation: readonly VerticalNavItemsType[] = [
   },
   {
     icon: <Mail />,
-    id: 'second-page',
-    link: '/second-page',
-    text: 'Second Page'
+    id: 'products',
+    link: '/products',
+    text: 'Products'
   },
   {
     action: 'read',

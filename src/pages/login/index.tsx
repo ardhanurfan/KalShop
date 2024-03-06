@@ -7,7 +7,7 @@ import {
   BrandGoogle,
   BrandTwitter
 } from '@nxweb/icons/tabler';
-import type { Page } from '@nxweb/react/router';
+import type { PageComponent } from '@nxweb/react';
 
 import {
   Box,
@@ -64,7 +64,7 @@ const getloginImage = (skin: string) => {
   return skin === 'bordered' ? loginImageBordered : loginImage;
 };
 
-const LoginPage: Page = () => {
+const LoginPage: PageComponent = () => {
   const auth = useAuth();
   const navigate = useNavigate();
   const [params] = useSearchParams();

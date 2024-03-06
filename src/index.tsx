@@ -1,9 +1,8 @@
 import { lazy, StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { ServiceWorker } from '@nxweb/core/web';
-import { BrowserRouter } from '@nxweb/react/router';
-import { disableReactDevTools } from '@nxweb/react/utils';
+import { ServiceWorker } from '@nxweb/core';
+import { BrowserRouter, disableReactDevTools } from '@nxweb/react';
 import { PageSpinner, Toast } from '@nxweb/react-bootstrap';
 
 import { layouts } from '@config/layout.js';
@@ -68,7 +67,6 @@ ServiceWorker.unregister();
 
 export default {
   env: {
-    apiURL: process.env.API_URL,
-    brandingURL: process.env.BRANDING_URL
+    apiURL: process.env.API_URL
   }
 };
