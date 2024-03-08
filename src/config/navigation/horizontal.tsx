@@ -1,4 +1,4 @@
-import { Lock, Mail, Shield, SmartHome } from '@nxweb/icons/tabler';
+import { File, Lock, Mail, Shield, SmartHome } from '@nxweb/icons/tabler';
 
 import type { HorizontalNavItemsType } from '@layouts/types.js';
 
@@ -58,6 +58,32 @@ export const navigation: readonly HorizontalNavItemsType[] = [
         link: '/pages/auth/reset-password-v1',
         text: 'Reset Password',
         title: 'Reset Password'
+      }
+    ]
+  },
+  {
+    icon: <File />,
+    id: 'misc',
+    text: 'Miscellaneous',
+    title: 'Miscellaneous',
+    children: [
+      {
+        id: 'page-not-found',
+        link: '/pages/misc/404',
+        text: 'Page Not Found - 404',
+        title: 'Page Not Found - 404'
+      },
+      {
+        id: 'not-authorized',
+        link: '/pages/misc/401',
+        text: 'Not Authorized - 401',
+        title: 'Not Authorized - 401'
+      },
+      {
+        id: 'server-error',
+        link: '/pages/misc/500',
+        text: 'Server Error - 500',
+        title: 'Server Error - 500'
       }
     ]
   }

@@ -1,4 +1,4 @@
-import { Circle, Lock, Mail, Shield, SmartHome } from '@nxweb/icons/tabler';
+import { Circle, File, Lock, Mail, Shield, SmartHome } from '@nxweb/icons/tabler';
 
 import type { VerticalNavItemsType } from '@layouts/types.js';
 
@@ -27,6 +27,10 @@ export const navigation: readonly VerticalNavItemsType[] = [
     section: 'Apps & Pages'
   },
   {
+    icon: <Lock />,
+    id: 'auth-pages',
+    text: 'Auth Pages',
+    title: 'Auth Pages',
     children: [
       {
         icon: <Circle />,
@@ -63,10 +67,35 @@ export const navigation: readonly VerticalNavItemsType[] = [
         text: 'Reset Password',
         title: 'Reset Password'
       }
-    ],
-    icon: <Lock />,
-    id: 'auth-pages',
-    text: 'Auth Pages',
-    title: 'Auth Pages'
+    ]
+  },
+  {
+    icon: <File />,
+    id: 'misc',
+    text: 'Miscellaneous',
+    title: 'Miscellaneous',
+    children: [
+      {
+        icon: <Circle />,
+        id: 'page-not-found',
+        link: '/misc/404',
+        text: 'Page Not Found - 404',
+        title: 'Page Not Found - 404'
+      },
+      {
+        icon: <Circle />,
+        id: 'not-authorized',
+        link: '/misc/401',
+        text: 'Not Authorized - 401',
+        title: 'Not Authorized - 401'
+      },
+      {
+        icon: <Circle />,
+        id: 'server-error',
+        link: '/misc/500',
+        text: 'Server Error - 500',
+        title: 'Server Error - 500'
+      }
+    ]
   }
 ];
