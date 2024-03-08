@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import type { Page } from '@nxweb/react/router';
+import type { PageComponent } from '@nxweb/react';
 
 import type { CardProps } from '@components/material.js';
 import {
@@ -25,7 +25,7 @@ const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none'
 }));
 
-const VerifyEmailV1: Page = () => {
+const VerifyEmailV1: PageComponent = () => {
   const theme = useTheme();
 
   return (

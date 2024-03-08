@@ -10,7 +10,7 @@ import {
   Eye,
   EyeOff
 } from '@nxweb/icons/tabler';
-import type { Page } from '@nxweb/react/router';
+import type { PageComponent } from '@nxweb/react';
 
 import type { CardProps, FormControlLabelProps } from '@components/material.js';
 import {
@@ -37,7 +37,6 @@ interface State {
   showPassword: boolean
 }
 
-// ** Styled Components
 const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
   [theme.breakpoints.up('sm')]: { width: '25rem' }
 }));
@@ -55,7 +54,7 @@ const FormControlLabel = styled(MuiFormControlLabel)<FormControlLabelProps>(
   })
 );
 
-const LoginV1: Page = () => {
+const LoginV1: PageComponent = () => {
   const [values, setValues] = useState<State>({
     password: '',
     showPassword: false
