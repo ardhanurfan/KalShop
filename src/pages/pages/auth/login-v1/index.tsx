@@ -1,13 +1,17 @@
-// ** React Imports
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
-// ** Link Import
 import { Link } from 'react-router-dom';
 
-// ** Icon Imports
-import { BrandFacebook, BrandGithub, BrandGoogle, BrandTwitter, Eye, EyeOff } from '@nxweb/icons/tabler';
+import {
+  BrandFacebook,
+  BrandGithub,
+  BrandGoogle,
+  BrandTwitter,
+  Eye,
+  EyeOff
+} from '@nxweb/icons/tabler';
+import type { Page } from '@nxweb/react/router';
 
-// ** MUI Components
 import type { CardProps, FormControlLabelProps } from '@components/material.js';
 import {
   Box,
@@ -24,10 +28,8 @@ import {
   Typography,
   useTheme
 } from '@components/material.js';
-// ** Configs
 import { config as themeConfig } from '@config/theme.js';
 
-// ** Demo Imports
 import AuthIllustrationV1Wrapper from '@src/views/pages/auth/AuthIllustrationV1Wrapper.js';
 
 interface State {
@@ -41,29 +43,30 @@ const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
 }));
 
 const LinkStyled = styled(Link)(({ theme }) => ({
-  textDecoration: 'none',
-  color: `${theme.palette.primary.main} !important`
+  color: `${theme.palette.primary.main} !important`,
+  textDecoration: 'none'
 }));
 
-const FormControlLabel = styled(MuiFormControlLabel)<FormControlLabelProps>(({ theme }) => ({
-  '& .MuiFormControlLabel-label': {
-    color: theme.palette.text.secondary
-  }
-}));
+const FormControlLabel = styled(MuiFormControlLabel)<FormControlLabelProps>(
+  ({ theme }) => ({
+    '& .MuiFormControlLabel-label': {
+      color: theme.palette.text.secondary
+    }
+  })
+);
 
-const LoginV1 = () => {
-  // ** State
+const LoginV1: Page = () => {
   const [values, setValues] = useState<State>({
     password: '',
     showPassword: false
   });
 
-  // ** Hook
   const theme = useTheme();
 
-  const handleChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
+  const handleChange =
+    (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, [prop]: event.target.value });
+    };
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
@@ -73,9 +76,23 @@ const LoginV1 = () => {
     <Box className="content-center">
       <AuthIllustrationV1Wrapper>
         <Card>
-          <CardContent sx={{ p: (theme) => `${theme.spacing(10.5, 8, 8)} !important` }}>
-            <Box sx={{ mb: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <svg fill="none" viewBox="0 0 32 22" width={34} xmlns="http://www.w3.org/2000/svg">
+          <CardContent
+            sx={{ p: (theme) => `${theme.spacing(10.5, 8, 8)} !important` }}
+          >
+            <Box
+              sx={{
+                alignItems: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                mb: 8
+              }}
+            >
+              <svg
+                fill="none"
+                viewBox="0 0 32 22"
+                width={34}
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   clipRule="evenodd"
                   d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
@@ -99,7 +116,7 @@ const LoginV1 = () => {
                   fill={theme.palette.primary.main}
                   fillRule="evenodd" />
               </svg>
-              <Typography sx={{ ml: 2.5, fontWeight: 700 }} variant="h3">
+              <Typography sx={{ fontWeight: 700, ml: 2.5 }} variant="h3">
                 {themeConfig.templateName}
               </Typography>
             </Box>
@@ -111,7 +128,11 @@ const LoginV1 = () => {
                 Please sign-in to your account and start the adventure
               </Typography>
             </Box>
-            <form autoComplete="off" noValidate={true} onSubmit={(e) => e.preventDefault()}>
+            <form
+              autoComplete="off"
+              noValidate={true}
+              onSubmit={(e) => e.preventDefault()}
+            >
               <TextField
                 autoFocus={true}
                 fullWidth={true}
@@ -129,7 +150,7 @@ const LoginV1 = () => {
                         onClick={handleClickShowPassword}
                         onMouseDown={(e) => e.preventDefault()}
                       >
-                      {values.showPassword ? <Eye /> : <EyeOff />}
+                        {values.showPassword ? <Eye /> : <EyeOff />}
                       </IconButton>
                     </InputAdornment>
                   )
@@ -144,53 +165,93 @@ const LoginV1 = () => {
                 onChange={handleChange('password')} />
               <Box
                 sx={{
-                  mb: 1.75,
+                  alignItems: 'center',
                   display: 'flex',
                   flexWrap: 'wrap',
-                  alignItems: 'center',
-                  justifyContent: 'space-between'
+                  justifyContent: 'space-between',
+                  mb: 1.75
                 }}
               >
                 <FormControlLabel control={<Checkbox />} label="Remember Me" />
-                <Typography component={LinkStyled} to="/pages/auth/forgot-password-v1">
+                <Typography
+                  component={LinkStyled}
+                  to="/pages/auth/forgot-password-v1"
+                >
                   Forgot Password?
                 </Typography>
               </Box>
-              <Button fullWidth={true} sx={{ mb: 4 }} type="submit" variant="contained">
+              <Button
+                fullWidth={true}
+                sx={{ mb: 4 }}
+                type="submit"
+                variant="contained"
+              >
                 Login
               </Button>
-              <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <Typography sx={{ color: 'text.secondary', mr: 2 }}>New on our platform?</Typography>
+              <Box
+                sx={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  justifyContent: 'center'
+                }}
+              >
+                <Typography sx={{ color: 'text.secondary', mr: 2 }}>
+                  New on our platform?
+                </Typography>
                 <Typography component={LinkStyled} to="/pages/auth/register-v1">
                   Create an account
                 </Typography>
               </Box>
               <Divider
                 sx={{
-                  color: 'text.disabled',
                   '& .MuiDivider-wrapper': { px: 6 },
+                  color: 'text.disabled',
                   fontSize: theme.typography.body2.fontSize,
                   my: (theme) => `${theme.spacing(6)} !important`
                 }}
               >
                 or
               </Divider>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <IconButton component={Link} sx={{ color: '#497ce2' }} to="/" onClick={(e) => e.preventDefault()}>
+              <Box
+                sx={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <IconButton
+                  component={Link}
+                  sx={{ color: '#497ce2' }}
+                  to="/"
+                  onClick={(e) => e.preventDefault()}
+                >
                   <BrandFacebook />
                 </IconButton>
-                <IconButton component={Link} sx={{ color: '#1da1f2' }} to="/" onClick={(e) => e.preventDefault()}>
+                <IconButton
+                  component={Link}
+                  sx={{ color: '#1da1f2' }}
+                  to="/"
+                  onClick={(e) => e.preventDefault()}
+                >
                   <BrandTwitter />
                 </IconButton>
                 <IconButton
                   component={Link}
-                  sx={{ color: (theme) => (theme.palette.mode === 'light' ? '#272727' : 'grey.300') }}
+                  sx={{
+                    color: (theme) => (theme.palette.mode === 'light' ? '#272727' : 'grey.300')
+                  }}
                   to="/"
                   onClick={(e) => e.preventDefault()}
                 >
                   <BrandGithub />
                 </IconButton>
-                <IconButton component={Link} sx={{ color: '#db4437' }} to="/" onClick={(e) => e.preventDefault()}>
+                <IconButton
+                  component={Link}
+                  sx={{ color: '#db4437' }}
+                  to="/"
+                  onClick={(e) => e.preventDefault()}
+                >
                   <BrandGoogle />
                 </IconButton>
               </Box>
@@ -203,5 +264,6 @@ const LoginV1 = () => {
 };
 
 LoginV1.layout = 'blank';
+LoginV1.displayName = 'LoginV1';
 
 export default LoginV1;

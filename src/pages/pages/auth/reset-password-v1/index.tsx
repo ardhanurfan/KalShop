@@ -1,13 +1,10 @@
-// ** React Imports
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
-// ** Link Import
 import { Link } from 'react-router-dom';
 
-// ** Icon Imports
 import { ChevronLeft, Eye, EyeOff } from '@nxweb/icons/tabler';
+import type { Page } from '@nxweb/react/router';
 
-// ** MUI Components
 import type { CardProps } from '@components/material.js';
 import {
   Box,
@@ -21,10 +18,8 @@ import {
   Typography,
   useTheme
 } from '@components/material.js';
-// ** Configs
 import { config as themeConfig } from '@config/theme.js';
 
-// ** Demo Imports
 import AuthIllustrationV1Wrapper from '@src/views/pages/auth/AuthIllustrationV1Wrapper.js';
 
 interface State {
@@ -34,7 +29,6 @@ interface State {
   showNewPassword: boolean
 }
 
-// ** Styled Components
 const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
   [theme.breakpoints.up('sm')]: { width: '25rem' }
 }));
@@ -47,8 +41,7 @@ const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none'
 }));
 
-const ResetPasswordV1 = () => {
-  // ** States
+const ResetPasswordV1: Page = () => {
   const [values, setValues] = useState<State>({
     confirmNewPassword: '',
     newPassword: '',
@@ -56,32 +49,48 @@ const ResetPasswordV1 = () => {
     showNewPassword: false
   });
 
-  // ** Hook
   const theme = useTheme();
 
-  // Handle New Password
-  const handleNewPasswordChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
+  const handleNewPasswordChange =
+    (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, [prop]: event.target.value });
+    };
   const handleClickShowNewPassword = () => {
     setValues({ ...values, showNewPassword: !values.showNewPassword });
   };
 
-  // Handle Confirm New Password
-  const handleConfirmNewPasswordChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
+  const handleConfirmNewPasswordChange =
+    (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, [prop]: event.target.value });
+    };
   const handleClickShowConfirmNewPassword = () => {
-    setValues({ ...values, showConfirmNewPassword: !values.showConfirmNewPassword });
+    setValues({
+      ...values,
+      showConfirmNewPassword: !values.showConfirmNewPassword
+    });
   };
 
   return (
     <Box className="content-center">
       <AuthIllustrationV1Wrapper>
         <Card>
-          <CardContent sx={{ p: (theme) => `${theme.spacing(10.5, 8, 8)} !important` }}>
-            <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', mb: 8 }}>
-              <svg fill="none" viewBox="0 0 32 22" width={34} xmlns="http://www.w3.org/2000/svg">
+          <CardContent
+            sx={{ p: (theme) => `${theme.spacing(10.5, 8, 8)} !important` }}
+          >
+            <Box
+              sx={{
+                alignItems: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                mb: 8
+              }}
+            >
+              <svg
+                fill="none"
+                viewBox="0 0 32 22"
+                width={34}
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   clipRule="evenodd"
                   d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
@@ -120,7 +129,11 @@ const ResetPasswordV1 = () => {
                 </Typography>
               </Typography>
             </Box>
-            <form autoComplete="off" noValidate={true} onSubmit={(e) => e.preventDefault()}>
+            <form
+              autoComplete="off"
+              noValidate={true}
+              onSubmit={(e) => e.preventDefault()}
+            >
               <TextField
                 InputProps={{
                   endAdornment: (
@@ -168,10 +181,22 @@ const ResetPasswordV1 = () => {
                 type={values.showConfirmNewPassword ? 'text' : 'password'}
                 value={values.confirmNewPassword}
                 onChange={handleConfirmNewPasswordChange('confirmNewPassword')} />
-              <Button fullWidth={true} sx={{ mb: 4 }} type="submit" variant="contained">
+              <Button
+                fullWidth={true}
+                sx={{ mb: 4 }}
+                type="submit"
+                variant="contained"
+              >
                 Set New Password
               </Button>
-              <Typography sx={{ '& svg': { mr: 1 }, alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
+              <Typography
+                sx={{
+                  '& svg': { mr: 1 },
+                  alignItems: 'center',
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
                 <Typography component={LinkStyled} to="/pages/auth/login-v1">
                   <ChevronLeft />
                   <span>Back to login</span>

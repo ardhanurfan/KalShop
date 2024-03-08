@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 
+import type { Page } from '@nxweb/react/router';
+
 import { FooterIllustrations } from '@components/illustrations/footer-illustrations.js';
 import type { BoxProps } from '@components/material.js';
 import { Box, Button, styled, Typography } from '@components/material.js';
 
-// ** Styled Components
 const BoxWrapper = styled(Box)<BoxProps>(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     width: '90vw'
@@ -24,23 +25,37 @@ const Img = styled('img')(({ theme }) => ({
   }
 }));
 
-const Error401 = () => {
+const Error401: Page = () => {
   return (
     <Box className="content-center">
-      <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+      <Box
+        sx={{
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          p: 5,
+          textAlign: 'center'
+        }}
+      >
         <BoxWrapper>
           <Typography sx={{ mb: 1.5 }} variant="h2">
             You are not authorized!
           </Typography>
           <Typography sx={{ color: 'text.secondary' }}>
-            You do not have permission to view this page using the credentials that you have provided while login.
+            You do not have permission to view this page using the credentials
+            that you have provided while login.
           </Typography>
-          <Typography sx={{ mb: 6, color: 'text.secondary' }}>Please contact your site administrator.</Typography>
+          <Typography sx={{ color: 'text.secondary', mb: 6 }}>
+            Please contact your site administrator.
+          </Typography>
           <Button component={Link} to="/" variant="contained">
             Back to Home
           </Button>
         </BoxWrapper>
-        <Img alt="error-illustration" height="500" src="https://demos.pixinvent.com/vuexy-nextjs-admin-template/demo-1/images/pages/401.png" />
+        <Img
+          alt="error-illustration"
+          height="500"
+          src="https://demos.pixinvent.com/vuexy-nextjs-admin-template/demo-1/images/pages/401.png" />
       </Box>
       <FooterIllustrations />
     </Box>
@@ -48,7 +63,6 @@ const Error401 = () => {
 };
 
 Error401.layout = 'blank';
-
 Error401.displayName = 'Error401';
 
 export default Error401;

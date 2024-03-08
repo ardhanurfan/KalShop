@@ -1,7 +1,7 @@
-// ** Link Import
 import { Link } from 'react-router-dom';
 
-// ** MUI Components
+import type { Page } from '@nxweb/react/router';
+
 import type { CardProps } from '@components/material.js';
 import {
   Box,
@@ -12,24 +12,20 @@ import {
   Typography,
   useTheme
 } from '@components/material.js';
-// ** Configs
 import { config as themeConfig } from '@config/theme.js';
 
-// ** Demo Imports
 import AuthIllustrationV1Wrapper from '@src/views/pages/auth/AuthIllustrationV1Wrapper.js';
 
-// ** Styled Components
 const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
   [theme.breakpoints.up('sm')]: { width: '25rem' }
 }));
 
 const LinkStyled = styled(Link)(({ theme }) => ({
-  textDecoration: 'none',
-  color: `${theme.palette.primary.main} !important`
+  color: `${theme.palette.primary.main} !important`,
+  textDecoration: 'none'
 }));
 
-const VerifyEmailV1 = () => {
-  // ** Hook
+const VerifyEmailV1: Page = () => {
   const theme = useTheme();
 
   return (
@@ -41,10 +37,10 @@ const VerifyEmailV1 = () => {
           >
             <Box
               sx={{
-                mb: 8,
-                display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                display: 'flex',
+                justifyContent: 'center',
+                mb: 8
               }}
             >
               <svg
@@ -76,7 +72,7 @@ const VerifyEmailV1 = () => {
                   fill={theme.palette.primary.main}
                   fillRule="evenodd" />
               </svg>
-              <Typography sx={{ ml: 2.5, fontWeight: 700 }} variant="h3">
+              <Typography sx={{ fontWeight: 700, ml: 2.5 }} variant="h3">
                 {themeConfig.templateName}
               </Typography>
             </Box>
@@ -94,10 +90,10 @@ const VerifyEmailV1 = () => {
             </Button>
             <Box
               sx={{
-                mt: 4,
-                display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                display: 'flex',
+                justifyContent: 'center',
+                mt: 4
               }}
             >
               <Typography sx={{ color: 'text.secondary' }}>

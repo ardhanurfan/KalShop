@@ -1,12 +1,24 @@
 import type { MouseEvent } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
-import { BrandFacebook, BrandGithub, BrandGoogle, BrandTwitter } from '@nxweb/icons/tabler';
+import {
+  BrandFacebook,
+  BrandGithub,
+  BrandGoogle,
+  BrandTwitter
+} from '@nxweb/icons/tabler';
 import type { Page } from '@nxweb/react/router';
 
 import {
-  Box, Button, Divider, IconButton, Stack,
-  styled, Typography, useMediaQuery, useTheme
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  Stack,
+  styled,
+  Typography,
+  useMediaQuery,
+  useTheme
 } from '@components/material.js';
 import type { BoxProps } from '@components/material.js';
 import { config as themeConfig } from '@config/theme.js';
@@ -88,7 +100,9 @@ const LoginPage: Page = () => {
             position: 'relative'
           }}
         >
-          <LoginIllustration alt="login-illustration" src={getloginImage(skin)} />
+          <LoginIllustration
+            alt="login-illustration"
+            src={getloginImage(skin)} />
           <FooterIllustrations />
         </Box>
         )
@@ -104,7 +118,12 @@ const LoginPage: Page = () => {
           }}
         >
           <Box sx={{ maxWidth: 400, width: '100%' }}>
-            <svg fill="none" viewBox="0 0 32 22" width={34} xmlns="http://www.w3.org/2000/svg">
+            <svg
+              fill="none"
+              viewBox="0 0 32 22"
+              width={34}
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 clipRule="evenodd"
                 d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
@@ -137,7 +156,13 @@ const LoginPage: Page = () => {
               </Typography>
             </Box>
 
-            <Button fullWidth={true} sx={{ mb: 4 }} type="submit" variant="contained" onClick={handleLogin}>
+            <Button
+              fullWidth={true}
+              sx={{ mb: 4 }}
+              type="submit"
+              variant="contained"
+              onClick={handleLogin}
+            >
               Login
             </Button>
             <Stack
@@ -165,7 +190,13 @@ const LoginPage: Page = () => {
             >
               or
             </Divider>
-            <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
+            <Box
+              sx={{
+                alignItems: 'center',
+                display: 'flex',
+                justifyContent: 'center'
+              }}
+            >
               <IconButton
                 component={Link}
                 sx={{ color: '#497ce2' }}
@@ -184,7 +215,9 @@ const LoginPage: Page = () => {
               </IconButton>
               <IconButton
                 component={Link}
-                sx={{ color: (theme) => (theme.palette.mode === 'light' ? '#272727' : 'grey.300') }}
+                sx={{
+                  color: (theme) => (theme.palette.mode === 'light' ? '#272727' : 'grey.300')
+                }}
                 to="/"
                 onClick={(e: MouseEvent<HTMLElement>) => e.preventDefault()}
               >

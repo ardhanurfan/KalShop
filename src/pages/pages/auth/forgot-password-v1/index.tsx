@@ -1,10 +1,7 @@
-// ** React Imports
-
-// ** Link Import
 import { Link } from 'react-router-dom';
 
-// ** MUI Components
 import { ChevronLeft } from '@nxweb/icons/tabler';
+import type { Page } from '@nxweb/react/router';
 
 import type { CardProps } from '@components/material.js';
 import {
@@ -17,28 +14,24 @@ import {
   Typography,
   useTheme
 } from '@components/material.js';
-// ** Configs
 import { config as themeConfig } from '@config/theme.js';
 
-// ** Demo Imports
 import AuthIllustrationV1Wrapper from '@src/views/pages/auth/AuthIllustrationV1Wrapper.js';
 
-// ** Styled Components
 const Card = styled(MuiCard)<CardProps>(({ theme }) => ({
   [theme.breakpoints.up('sm')]: { width: '25rem' }
 }));
 
 const LinkStyled = styled(Link)(({ theme }) => ({
-  display: 'flex',
   alignItems: 'center',
-  textDecoration: 'none',
-  justifyContent: 'center',
   color: theme.palette.primary.main,
-  fontSize: theme.typography.body1.fontSize
+  display: 'flex',
+  fontSize: theme.typography.body1.fontSize,
+  justifyContent: 'center',
+  textDecoration: 'none'
 }));
 
-const ForgotPasswordV1 = () => {
-  // ** Hook
+const ForgotPasswordV1: Page = () => {
   const theme = useTheme();
 
   return (
@@ -50,10 +43,10 @@ const ForgotPasswordV1 = () => {
           >
             <Box
               sx={{
-                mb: 8,
-                display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                display: 'flex',
+                justifyContent: 'center',
+                mb: 8
               }}
             >
               <svg
@@ -85,7 +78,7 @@ const ForgotPasswordV1 = () => {
                   fill={theme.palette.primary.main}
                   fillRule="evenodd" />
               </svg>
-              <Typography sx={{ ml: 2.5, fontWeight: 700 }} variant="h3">
+              <Typography sx={{ fontWeight: 700, ml: 2.5 }} variant="h3">
                 {themeConfig.templateName}
               </Typography>
             </Box>
@@ -120,10 +113,10 @@ const ForgotPasswordV1 = () => {
               </Button>
               <Typography
                 sx={{
-                  display: 'flex',
+                  '& svg': { mr: 1 },
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  '& svg': { mr: 1 }
+                  display: 'flex',
+                  justifyContent: 'center'
                 }}
               >
                 <LinkStyled to="/pages/auth/login-v1">
