@@ -3,14 +3,13 @@ import type { FC } from 'react';
 
 import { CacheProvider } from '@emotion/react';
 
-import { Head } from '@nxweb/react/components';
-import type { LayoutWrapperProps } from '@nxweb/react/layout';
+import type { LayoutWrapperProps } from '@nxweb/react';
+import { createEmotionCache, Head } from '@nxweb/react';
 import { PageSpinner } from '@nxweb/react-bootstrap';
 
 import { app } from '@config/app.js';
 import { SettingsProvider } from '@hooks/use-settings.js';
 import { LayoutWrapper } from '@layouts/wrapper.js';
-import { createEmotionCache } from '@lib/emotion-cache.js';
 
 /*
  * Uncomment to import additional stylesheets for this App

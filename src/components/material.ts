@@ -1,50 +1,62 @@
 /* eslint-disable import/max-dependencies */
 // +re-export from @mui/material
 
-import { default as AlertComponent } from '@mui/material/Alert';
-import { default as AppBarComponent } from '@mui/material/AppBar';
-import { default as AvatarComponent } from '@mui/material/Avatar';
-import { default as BadgeComponent } from '@mui/material/Badge';
-import { default as BoxComponent } from '@mui/material/Box';
-import { default as ButtonComponent } from '@mui/material/Button';
-import { default as CardComponent } from '@mui/material/Card';
-import { default as CardContentComponent } from '@mui/material/CardContent';
-import { default as CardHeaderComponent } from '@mui/material/CardHeader';
-import { default as CheckboxComponent } from '@mui/material/Checkbox';
-import { default as ChipComponent } from '@mui/material/Chip';
-import { default as CircularProgressComponent } from '@mui/material/CircularProgress';
-import { default as ClickAwayListenerComponent } from '@mui/material/ClickAwayListener';
-import { default as CollapseComponent } from '@mui/material/Collapse';
-import { default as CssBaselineComponent } from '@mui/material/CssBaseline';
-import { default as DividerComponent } from '@mui/material/Divider';
-import { default as DrawerComponent } from '@mui/material/Drawer';
-import { default as FabComponent } from '@mui/material/Fab';
-import { default as FadeComponent } from '@mui/material/Fade';
-import { default as FormControlLabelComponent } from '@mui/material/FormControlLabel';
-import { default as GlobalStylesComponent } from '@mui/material/GlobalStyles';
-import { default as GridComponent } from '@mui/material/Grid';
-import { default as IconButtonComponent } from '@mui/material/IconButton';
-import { default as InputAdornmentComponent } from '@mui/material/InputAdornment';
-import { default as ListComponent } from '@mui/material/List';
-import { default as ListItemComponent } from '@mui/material/ListItem';
-import { default as ListItemButtonComponent } from '@mui/material/ListItemButton';
-import { default as ListItemIconComponent } from '@mui/material/ListItemIcon';
-import { default as ListSubheaderComponent } from '@mui/material/ListSubheader';
-import { default as MenuComponent } from '@mui/material/Menu';
-import { default as MenuItemComponent } from '@mui/material/MenuItem';
-import { default as PaperComponent } from '@mui/material/Paper';
-import { default as RadioComponent } from '@mui/material/Radio';
-import { default as RadioGroupComponent } from '@mui/material/RadioGroup';
-import { default as StackComponent } from '@mui/material/Stack';
-import { default as SwipeableDrawerComponent } from '@mui/material/SwipeableDrawer';
-import { default as SwitchComponent } from '@mui/material/Switch';
-import { default as TextFieldComponent } from '@mui/material/TextField';
-import { default as ToolbarComponent } from '@mui/material/Toolbar';
-import { default as TypographyComponent } from '@mui/material/Typography';
-import { default as ZoomComponent } from '@mui/material/Zoom';
-import { createTheme, responsiveFontSizes, styled, ThemeProvider, useTheme } from '@mui/material/styles';
-import { default as useMediaQueryHook } from '@mui/material/useMediaQuery';
-import { default as useScrollTriggerHook } from '@mui/material/useScrollTrigger';
+import { default as Alert } from '@mui/material/Alert';
+import { default as AppBar } from '@mui/material/AppBar';
+import { default as Avatar } from '@mui/material/Avatar';
+import { default as Badge } from '@mui/material/Badge';
+import { default as Box } from '@mui/material/Box';
+import { default as Button } from '@mui/material/Button';
+import { default as Card } from '@mui/material/Card';
+import { default as CardContent } from '@mui/material/CardContent';
+import { default as CardHeader } from '@mui/material/CardHeader';
+import { default as Checkbox } from '@mui/material/Checkbox';
+import { default as Chip } from '@mui/material/Chip';
+import { default as CircularProgress } from '@mui/material/CircularProgress';
+import { default as ClickAwayListener } from '@mui/material/ClickAwayListener';
+import { default as Collapse } from '@mui/material/Collapse';
+import { default as CssBaseline } from '@mui/material/CssBaseline';
+import { default as Divider } from '@mui/material/Divider';
+import { default as Drawer } from '@mui/material/Drawer';
+import { default as Fab } from '@mui/material/Fab';
+import { default as Fade } from '@mui/material/Fade';
+import { default as FormControlLabel } from '@mui/material/FormControlLabel';
+import { default as GlobalStyles } from '@mui/material/GlobalStyles';
+import { default as Grid } from '@mui/material/Grid';
+import { default as IconButton } from '@mui/material/IconButton';
+import { default as InputAdornment } from '@mui/material/InputAdornment';
+import { default as List } from '@mui/material/List';
+import { default as ListItem } from '@mui/material/ListItem';
+import { default as ListItemButton } from '@mui/material/ListItemButton';
+import { default as ListItemIcon } from '@mui/material/ListItemIcon';
+import { default as ListSubheader } from '@mui/material/ListSubheader';
+import { default as Menu } from '@mui/material/Menu';
+import { default as MenuItem } from '@mui/material/MenuItem';
+import { default as Paper } from '@mui/material/Paper';
+import { default as Radio } from '@mui/material/Radio';
+import { default as RadioGroup } from '@mui/material/RadioGroup';
+import { default as Stack } from '@mui/material/Stack';
+import { default as SwipeableDrawer } from '@mui/material/SwipeableDrawer';
+import { default as Switch } from '@mui/material/Switch';
+import { default as Table } from '@mui/material/Table';
+import { default as TableBody } from '@mui/material/TableBody';
+import { default as TableCell } from '@mui/material/TableCell';
+import { default as TableContainer } from '@mui/material/TableContainer';
+import { default as TableHead } from '@mui/material/TableHead';
+import { default as TableRow } from '@mui/material/TableRow';
+import { default as TextField } from '@mui/material/TextField';
+import { default as Toolbar } from '@mui/material/Toolbar';
+import { default as Typography } from '@mui/material/Typography';
+import { default as Zoom } from '@mui/material/Zoom';
+import {
+  createTheme,
+  responsiveFontSizes,
+  styled,
+  ThemeProvider,
+  useTheme
+} from '@mui/material/styles';
+import { default as useMediaQuery } from '@mui/material/useMediaQuery';
+import { default as useScrollTrigger } from '@mui/material/useScrollTrigger';
 
 import type { ComponentsPropsList, PaletteMode } from '@mui/material';
 import type { AlertProps } from '@mui/material/Alert';
@@ -82,60 +94,22 @@ import type { RadioGroupProps } from '@mui/material/RadioGroup';
 import type { StackProps } from '@mui/material/Stack';
 import type { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer';
 import type { SwitchProps } from '@mui/material/Switch';
+import type { TableProps } from '@mui/material/Table';
+import type { TableBodyProps } from '@mui/material/TableBody';
+import type { TableCellProps } from '@mui/material/TableCell';
+import type { TableContainerProps } from '@mui/material/TableContainer';
+import type { TableHeadProps } from '@mui/material/TableHead';
+import type { TableRowProps } from '@mui/material/TableRow';
 import type { TextFieldProps } from '@mui/material/TextField';
 import type { ToolbarProps } from '@mui/material/Toolbar';
 import type { TypographyProps } from '@mui/material/Typography';
 import type { ZoomProps } from '@mui/material/Zoom';
-import type { Direction, SxProps, Theme, ThemeOptions } from '@mui/material/styles';
-
-/*
- * The following lines is workaround for warning ts(2604):
- * "JSX element type '*' does not have any construct or call signatures"
- * being thrown when directly importing components using default export from @mui/material
- */
-const Alert = AlertComponent as unknown as typeof AlertComponent.default;
-const AppBar = AppBarComponent as unknown as typeof AppBarComponent.default;
-const Avatar = AvatarComponent as unknown as typeof AvatarComponent.default;
-const Badge = BadgeComponent as unknown as typeof BadgeComponent.default;
-const Box = BoxComponent as unknown as typeof BoxComponent.default;
-const Button = ButtonComponent as unknown as typeof ButtonComponent.default;
-const Card = CardComponent as unknown as typeof CardComponent.default;
-const CardContent = CardContentComponent as unknown as typeof CardContentComponent.default;
-const CardHeader = CardHeaderComponent as unknown as typeof CardHeaderComponent.default;
-const Checkbox = CheckboxComponent as unknown as typeof CheckboxComponent.default;
-const Chip = ChipComponent as unknown as typeof ChipComponent.default;
-const CircularProgress = CircularProgressComponent as unknown as typeof CircularProgressComponent.default;
-const ClickAwayListener = ClickAwayListenerComponent as unknown as typeof ClickAwayListenerComponent.default;
-const Collapse = CollapseComponent as unknown as typeof CollapseComponent.default;
-const CssBaseline = CssBaselineComponent as unknown as typeof CssBaselineComponent.default;
-const Divider = DividerComponent as unknown as typeof DividerComponent.default;
-const Drawer = DrawerComponent as unknown as typeof DrawerComponent.default;
-const Fab = FabComponent as unknown as typeof FabComponent.default;
-const Fade = FadeComponent as unknown as typeof FadeComponent.default;
-const FormControlLabel = FormControlLabelComponent as unknown as typeof FormControlLabelComponent.default;
-const GlobalStyles = GlobalStylesComponent as unknown as typeof GlobalStylesComponent.default;
-const Grid = GridComponent as unknown as typeof GridComponent.default;
-const IconButton = IconButtonComponent as unknown as typeof IconButtonComponent.default;
-const InputAdornment = InputAdornmentComponent as unknown as typeof InputAdornmentComponent.default;
-const List = ListComponent as unknown as typeof ListComponent.default;
-const ListItem = ListItemComponent as unknown as typeof ListItemComponent.default;
-const ListItemButton = ListItemButtonComponent as unknown as typeof ListItemButtonComponent.default;
-const ListItemIcon = ListItemIconComponent as unknown as typeof ListItemIconComponent.default;
-const ListSubheader = ListSubheaderComponent as unknown as typeof ListSubheaderComponent.default;
-const Menu = MenuComponent as unknown as typeof MenuComponent.default;
-const MenuItem = MenuItemComponent as unknown as typeof MenuItemComponent.default;
-const Paper = PaperComponent as unknown as typeof PaperComponent.default;
-const Radio = RadioComponent as unknown as typeof RadioComponent.default;
-const RadioGroup = RadioGroupComponent as unknown as typeof RadioGroupComponent.default;
-const Stack = StackComponent as unknown as typeof StackComponent.default;
-const SwipeableDrawer = SwipeableDrawerComponent as unknown as typeof SwipeableDrawerComponent.default;
-const Switch = SwitchComponent as unknown as typeof SwitchComponent.default;
-const TextField = TextFieldComponent as unknown as typeof TextFieldComponent.default;
-const Toolbar = ToolbarComponent as unknown as typeof ToolbarComponent.default;
-const Typography = TypographyComponent as unknown as typeof TypographyComponent.default;
-const Zoom = ZoomComponent as unknown as typeof ZoomComponent.default;
-const useMediaQuery = useMediaQueryHook as unknown as typeof useMediaQueryHook.default;
-const useScrollTrigger = useScrollTriggerHook as unknown as typeof useScrollTriggerHook.default;
+import type {
+  Direction,
+  SxProps,
+  Theme,
+  ThemeOptions
+} from '@mui/material/styles';
 
 export {
   Alert,
@@ -172,9 +146,26 @@ export {
   Paper,
   Radio,
   RadioGroup,
-  Stack, SwipeableDrawer, Switch, TextField, ThemeProvider, Toolbar,
-  Typography, Zoom, createTheme, responsiveFontSizes, styled, useMediaQuery,
-  useScrollTrigger, useTheme
+  Stack,
+  SwipeableDrawer,
+  Switch,
+  TextField,
+  ThemeProvider,
+  Toolbar,
+  Typography,
+  Zoom,
+  createTheme,
+  responsiveFontSizes,
+  styled,
+  useMediaQuery,
+  useScrollTrigger,
+  useTheme,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
 };
 
 export type {
@@ -215,6 +206,12 @@ export type {
   SwipeableDrawerProps,
   SwitchProps,
   TextFieldProps,
+  TableProps,
+  TableBodyProps,
+  TableCellProps,
+  TableContainerProps,
+  TableHeadProps,
+  TableRowProps,
   ToolbarProps,
   TypographyProps,
   Direction,

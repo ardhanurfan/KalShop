@@ -1,8 +1,8 @@
-import type { Page } from '@nxweb/react/router';
+import type { PageComponent } from '@nxweb/react';
 
 import { Card, CardContent, CardHeader, Grid, Typography } from '@components/material.js';
 
-const Home: Page = () => {
+const Home: PageComponent = () => {
   return (
     <Grid container={true} spacing={6}>
       <Grid item={true} xs={12}>

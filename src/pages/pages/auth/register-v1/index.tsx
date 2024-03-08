@@ -10,7 +10,7 @@ import {
   Eye,
   EyeOff
 } from '@nxweb/icons/tabler';
-import type { Page } from '@nxweb/react/router';
+import type { PageComponent } from '@nxweb/react';
 
 import type { CardProps, FormControlLabelProps } from '@components/material.js';
 import {
@@ -56,7 +56,7 @@ const FormControlLabel = styled(MuiFormControlLabel)<FormControlLabelProps>(
   })
 );
 
-const RegisterV1: Page = () => {
+const RegisterV1: PageComponent = () => {
   const [values, setValues] = useState<State>({
     password: '',
     showPassword: false

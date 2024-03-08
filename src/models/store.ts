@@ -1,21 +1,28 @@
 import {
   combineReducers, createStore
-} from '@nxweb/core/redux';
+} from '@nxweb/core';
 import {
-  createCommandHook, createStoreHook, createStoreProvider
-} from '@nxweb/react/redux';
+  createCommandHook, createDispatchHook, createStoreHook, createStoreProvider
+} from '@nxweb/react';
+
+import { productsCommand } from './products/commands.js';
+import { productsReducer } from './products/reducers.js';
 
 import type { RootAction, RootModel } from './types.js';
 
 // ** Init reducers
 const rootReducer = combineReducers({
+  products: productsReducer
 });
 
 // ** Init models
-const rootModel: RootModel = {};
+const rootModel: RootModel = {
+  products: {}
+};
 
 // ** Init commands
 const rootCommand = {
+  products: productsCommand
 };
 
 // ** Create store
@@ -30,13 +37,5 @@ export const useStore = createStoreHook<RootModel, RootAction>();
 // ** Create command hook
 export const useCommand = createCommandHook(rootCommand);
 
-/*
- * TODO
- * export const useContextStore = createStoreHook<ContextModel, ContextAction>();
- * export function useContextStore(): [ContextModel | undefined, TDispatch<ContextAction>] {
- *   return [
- *     useSelector<RootModel, ContextModel | undefined>((state) => state.context),
- *     useDispatch<TDispatch<ContextAction>>()
- *   ];
- * }
- */
+// ** Create dispatch hook
+export const useDipatch = createDispatchHook<RootModel, RootAction>();

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import type { Page } from '@nxweb/react/router';
+import type { PageComponent } from '@nxweb/react';
 
 import { FooterIllustrations } from '@components/illustrations/footer-illustrations.js';
 import type { BoxProps } from '@components/material.js';
@@ -25,7 +25,7 @@ const Img = styled('img')(({ theme }) => ({
   }
 }));
 
-const Error500: Page = () => {
+const Error500: PageComponent = () => {
   return (
     <Box className="content-center">
       <Box

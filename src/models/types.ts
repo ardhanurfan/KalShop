@@ -1,8 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+import type { ProductsAction, ProductsModel } from './products/types';
+
 export interface RootModel {
+  products?: ProductsModel
 }
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-export type RootAction = {
-  type: ''
-};
+export type RootAction = ProductsAction;

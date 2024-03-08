@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ChevronLeft, Eye, EyeOff } from '@nxweb/icons/tabler';
-import type { Page } from '@nxweb/react/router';
+import type { PageComponent } from '@nxweb/react';
 
 import type { CardProps } from '@components/material.js';
 import {
@@ -41,7 +41,7 @@ const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none'
 }));
 
-const ResetPasswordV1: Page = () => {
+const ResetPasswordV1: PageComponent = () => {
   const [values, setValues] = useState<State>({
     confirmNewPassword: '',
     newPassword: '',
