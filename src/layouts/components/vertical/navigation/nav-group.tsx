@@ -228,7 +228,7 @@ const VerticalNavGroup: FC<Props> = (props) => {
             }}
           >
             { isValidElement(icon)
-              ? cloneElement(icon, { ...icon.props || {}, ...parent, fontSize: '0.625rem' })
+              ? cloneElement(icon, { ...icon.props || {}, ...parent, fontSize: '1.375rem' })
               : null }
           </ListItemIcon>
           <MenuItemTextWrapper sx={{ ...menuGroupCollapsedStyles, ...isSubToSub ? { ml: 2 } : {} }}>
