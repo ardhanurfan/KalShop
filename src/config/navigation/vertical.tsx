@@ -27,6 +27,10 @@ export const navigation: readonly VerticalNavItemsType[] = [
     section: 'Apps & Pages'
   },
   {
+    icon: <Lock />,
+    id: 'auth-pages',
+    text: 'Auth Pages',
+    title: 'Auth Pages',
     children: [
       {
         icon: <Circle />,
@@ -63,11 +67,7 @@ export const navigation: readonly VerticalNavItemsType[] = [
         text: 'Reset Password',
         title: 'Reset Password'
       }
-    ],
-    icon: <Lock />,
-    id: 'auth-pages',
-    text: 'Auth Pages',
-    title: 'Auth Pages'
+    ]
   },
   {
     icon: <File />,

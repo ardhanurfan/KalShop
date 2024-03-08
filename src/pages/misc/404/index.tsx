@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 
+import type { Page } from '@nxweb/react/router';
+
 import { FooterIllustrations } from '@components/illustrations/footer-illustrations.js';
 import type { BoxProps } from '@components/material.js';
 import { Box, Button, styled, Typography } from '@components/material.js';
 
-// ** Styled Components
 const BoxWrapper = styled(Box)<BoxProps>(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     width: '90vw'
@@ -24,22 +25,33 @@ const Img = styled('img')(({ theme }) => ({
   }
 }));
 
-const Error404 = () => {
+const Error404: Page = () => {
   return (
     <Box className="content-center">
-      <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+      <Box
+        sx={{
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          p: 5,
+          textAlign: 'center'
+        }}
+      >
         <BoxWrapper>
           <Typography sx={{ mb: 1.5 }} variant="h2">
             Page Not Found :(
           </Typography>
-          <Typography sx={{ mb: 6, color: 'text.secondary' }}>
+          <Typography sx={{ color: 'text.secondary', mb: 6 }}>
             Oops! 😖 The requested URL was not found on this server.
           </Typography>
           <Button component={Link} to="/" variant="contained">
             Back to Home
           </Button>
         </BoxWrapper>
-        <Img alt="error-illustration" height="500" src="https://demos.pixinvent.com/vuexy-nextjs-admin-template/demo-1/images/pages/404.png" />
+        <Img
+          alt="error-illustration"
+          height="500"
+          src="https://demos.pixinvent.com/vuexy-nextjs-admin-template/demo-1/images/pages/404.png" />
       </Box>
       <FooterIllustrations />
     </Box>
@@ -47,7 +59,6 @@ const Error404 = () => {
 };
 
 Error404.layout = 'blank';
-
 Error404.displayName = 'Error404';
 
 export default Error404;
