@@ -58,9 +58,9 @@ export const palette = (mode: Palette['mode'], skin: Skin): Palette => {
     },
     primary: {
       contrastText: whiteColor,
-      dark: '#655BD3',
-      light: '#8479F2',
-      main: '#7367F0'
+      dark: '#008C62',
+      light: '#66CFB0',
+      main: '#00AF7B'
     },
     secondary: {
       contrastText: whiteColor,

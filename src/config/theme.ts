@@ -80,7 +80,7 @@ export const config: ThemeConfig = {
   appBarBlur: true /* true | false */,
 
   // ** Other Configs
-  disableCustomizer: false /* true | false */,
+  disableCustomizer: true /* true | false */,
   disableRipple: false /* true | false */,
   responsiveFontSizes: false /* true | false */,
   toastPosition: 'top-right' /* Top-left | top-center | top-right | bottom-left | bottom-center | bottom-right */
