@@ -1,6 +1,6 @@
 export const app = {
-  name: 'App Name',
-  title: 'App Title',
+  name: 'KalShop',
+  title: 'KalShop',
   url: '/',
 
   description: 'App Description',

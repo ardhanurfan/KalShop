@@ -1,8 +1,11 @@
 import type { PageComponent } from '@nxweb/react';
 
+import { getKalProducts } from '@api/clients/kalProducts';
 import { Card, CardContent, CardHeader, Grid, Typography } from '@components/material.js';
 
 const Home: PageComponent = () => {
+  getKalProducts();
+
   return (
     <Grid container={true} spacing={6}>
       <Grid item={true} xs={12}>

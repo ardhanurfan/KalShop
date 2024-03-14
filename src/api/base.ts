@@ -2,6 +2,7 @@ import { compact, createFetch, createFetchURL } from '@nxweb/core';
 import type { FetchURLOptions } from '@nxweb/core';
 
 import { apiMock } from './mock.js';
+import { endpoint } from './clients/products.js';
 
 export const apiURL = (endpoint: string, options: Readonly<FetchURLOptions> = {}) => {
   return createFetchURL(
@@ -27,3 +28,18 @@ export const API = (token: string, type: string = 'Bearer' as const, mocked: boo
 
   return mocked ? apiMock(fetch) : fetch;
 };
+
+export const apiUrlProducts = (
+  endpoint: string,
+  options: Readonly<FetchURLOptions> = {}
+) => createFetchURL(endpoint, {
+  baseURL: window.NX?.env?.apiProducts,
+  ...options
+});
+
+export const APIProducts = () => createFetch({
+  baseURL: window.NX?.env?.apiProducts,
+  headers: {
+    Authorization: `Bearer random`
+  }
+});
