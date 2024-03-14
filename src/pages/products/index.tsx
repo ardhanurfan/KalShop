@@ -1,12 +1,29 @@
-import type { MouseEvent } from 'react';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import type { MouseEvent } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { DotsVertical } from '@nxweb/icons/tabler';
-import type { PageComponent } from '@nxweb/react';
+import { DotsVertical } from "@nxweb/icons/tabler";
+import type { PageComponent } from "@nxweb/react";
 
-import { IconButton, Menu, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTheme } from '@components/material.js';
-import { useCommand, useStore } from '@models/store.js';
+import {
+  Card,
+  CardContent,
+  Grid,
+  IconButton,
+  Menu,
+  MenuItem,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  useTheme,
+} from "@components/material.js";
+import { useCommand, useStore } from "@models/store.js";
+import { Button, CardMedia, Typography } from "@mui/material";
+import ProductCard from "@components/productCard/ProductCard";
 
 const Products: PageComponent = () => {
   const navigate = useNavigate();
@@ -32,10 +49,9 @@ const Products: PageComponent = () => {
   };
 
   useEffect(() => {
-    dispatch(command.products.load(''))
-      .catch((err: unknown) => {
-        console.error(err);
-      });
+    dispatch(command.products.load("")).catch((err: unknown) => {
+      console.error(err);
+    });
 
     return () => {
       dispatch(command.products.clear());
@@ -44,42 +60,7 @@ const Products: PageComponent = () => {
 
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }}>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell align="center" width={40}>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {state?.products?.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{
-                  '&:last-child td, &:last-child th': {
-                    border: 0
-                  },
-                  backgroundColor: id === row.id ? theme.palette.divider : 'inherit'
-                }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.id}
-                </TableCell>
-                <TableCell>{row.title}</TableCell>
-                <TableCell>{row.description}</TableCell>
-                <TableCell align="center">
-                  <IconButton onClick={(e) => handleClick(e, row.id)}>
-                    <DotsVertical />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <ProductCard />
       <Menu
         anchorEl={anchorEl}
         id="basic-menu"
@@ -93,6 +74,6 @@ const Products: PageComponent = () => {
   );
 };
 
-Products.displayName = 'Products';
+Products.displayName = "Products";
 
 export default Products;

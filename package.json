@@ -38,13 +38,13 @@
     "@nxweb/core": "3.6.0-rc.35",
     "@nxweb/icons": "3.6.0-rc.29",
     "@nxweb/react": "3.6.0-rc.10",
-    "@nxweb/react-bootstrap": "^3.6.0-rc.0",
+    "@nxweb/react-bootstrap": "3.6.0-rc.0",
     "hoist-non-react-statics": "^3.3.2",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.9.1",
+    "react-bootstrap": "2.9.1",
     "react-dom": "^18.2.0",
     "react-popper": "^2.3.0",
-    "react-router-dom": "^6.17.0",
+    "react-router-d`om": "^6.17.0",
     "stylis-plugin-rtl": "^2.1.1"
   }
 }
