@@ -54,6 +54,7 @@ export const config: ThemeConfig = {
   contentWidth: 'boxed' /* full | boxed */,
   direction: 'ltr' /* ltr | rtl */,
   footer: 'static' /* fixed | static | hidden */,
+  // layout: 'horizontal' /* vertical | horizontal */,
   layout: 'vertical' /* vertical | horizontal */,
   mode: 'light' as Mode /* light | dark | semi-dark /*! Note: semi-dark value will only work for Vertical Layout */,
   skin: 'default' /* default | bordered */,

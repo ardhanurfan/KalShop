@@ -1,8 +1,20 @@
-import { File, Lock, Mail, Shield, SmartHome } from '@nxweb/icons/tabler';
+import { File, Lock, Mail, Pencil, Shield, ShoppingCart, SmartHome } from '@nxweb/icons/tabler';
 
 import type { HorizontalNavItemsType } from '@layouts/types.js';
 
 export const navigation: readonly HorizontalNavItemsType[] = [
+  {
+    icon: <ShoppingCart />,
+    id: 'cart',
+    link: '/cart',
+    text: 'Cart'
+  },
+  {
+    icon: <Pencil />,
+    id: 'add',
+    link: '/products/add',
+    text: 'Add Form'
+  },
   {
     icon: <SmartHome />,
     id: 'home',
