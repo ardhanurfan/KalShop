@@ -5,24 +5,28 @@ import {
   createCommandHook, createDispatchHook, createStoreHook, createStoreProvider
 } from '@nxweb/react';
 
-import { productsCommand } from './products/commands.js';
-import { productsReducer } from './products/reducers.js';
-
 import type { RootAction, RootModel } from './types.js';
+import { productsReducer } from './kalProducts/reducers.js';
+import { productsCommand } from './kalProducts/commands.js';
+import { CartCommand } from './cart/commands.js';
+import { CartReducers, initState } from './cart/reducers.js';
 
 // ** Init reducers
 const rootReducer = combineReducers({
-  products: productsReducer
+  products: productsReducer,
+  cart: CartReducers
 });
 
 // ** Init models
 const rootModel: RootModel = {
-  products: {}
+  products: {},
+  cart: initState
 };
 
 // ** Init commands
 const rootCommand = {
-  products: productsCommand
+  products: productsCommand,
+  cart: CartCommand
 };
 
 // ** Create store

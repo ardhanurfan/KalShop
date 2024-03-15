@@ -2,10 +2,26 @@ import type { PageComponent } from '@nxweb/react';
 
 import { getKalProducts } from '@api/clients/kalProducts';
 import { Card, CardContent, CardHeader, Grid, Typography } from '@components/material.js';
+import { store, useCommand, useStore } from '@models/store';
+import { useEffect } from 'react';
 
 const Home: PageComponent = () => {
-  getKalProducts();
+  const [state, dispatch] = useStore((store) => store.products)
+  const command = useCommand((cmd) => cmd)
 
+  useEffect(() => {
+    dispatch(command.products.getAllProduct())
+    .catch((err: unknown) => {
+      console.log(err)
+    })
+
+    return () => {
+      dispatch(command.products.clear)
+    }
+  }, []);
+
+  console.log('State')
+  console.log(state)
   return (
     <Grid container={true} spacing={6}>
       <Grid item={true} xs={12}>

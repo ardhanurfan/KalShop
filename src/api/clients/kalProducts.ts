@@ -8,7 +8,5 @@ export const getKalProducts = async (options?: Readonly<FetchURLOptions>) => {
   const url = apiUrlProducts(endpointProducts, options);
   const { data } = await APIProducts().get(url.toString())
 
-  console.log(data)
-
   return data;
 };

@@ -3,6 +3,7 @@ import type { FetchURLOptions } from '@nxweb/core';
 
 import { apiMock } from './mock.js';
 import { endpoint } from './clients/products.js';
+import { endpointProducts } from './clients/kalProducts.js';
 
 export const apiURL = (endpoint: string, options: Readonly<FetchURLOptions> = {}) => {
   return createFetchURL(
@@ -30,9 +31,9 @@ export const API = (token: string, type: string = 'Bearer' as const, mocked: boo
 };
 
 export const apiUrlProducts = (
-  endpoint: string,
+  endpointProducts: string,
   options: Readonly<FetchURLOptions> = {}
-) => createFetchURL(endpoint, {
+) => createFetchURL(endpointProducts, {
   baseURL: window.NX?.env?.apiProducts,
   ...options
 });
