@@ -3,8 +3,6 @@ import type { PageComponent } from "@nxweb/react";
 import { Box, Typography } from "@components/material.js";
 import CarouselBanner from "./_components/carousel-banner";
 import RecommendedProducts from "./_components/recommended-products";
-import { getProducts } from "@api/clients/products";
-import { productsCommand } from "@models/products/commands";
 import { useCommand, useStore } from "@models/store";
 import { useEffect, useMemo } from "react";
 import Categories from "./_components/categories";
@@ -39,7 +37,7 @@ const Home: PageComponent = () => {
   }, [productsState]);
 
   useEffect(() => {
-    dispatch(command.products.load(""));
+    dispatch(command.products.getAllProducts());
 
     return () => {
       dispatch(command.products.clear());

@@ -1,28 +1,12 @@
 import type { FetchURLOptions } from "@nxweb/core";
 
-import type { Product } from "@models/products/types.js";
+import { APIProducts, apiUrlProducts } from "../base.js";
 
-import { API, apiURL } from "../base.js";
+export const endpointProducts = "products";
 
-interface productsAPIResponse {
-  limit: number;
-  products: Product[];
-  skip: number;
-  total: number;
-}
+export const getAllProducts = async (options?: Readonly<FetchURLOptions>) => {
+  const url = apiUrlProducts(endpointProducts, options);
+  const { data } = await APIProducts().get(url.toString());
 
-export const endpointGetProducts = "products";
-
-export const getProducts = async (
-  token: string,
-  options?: Readonly<FetchURLOptions>
-) => {
-  const url = apiURL(endpointGetProducts, options);
-  const { data } = await API(
-    token /* +uncomment to mock: , undefined, true */
-  ).get(url.toString());
-
-  const response = data as productsAPIResponse;
-
-  return response.products;
+  return data;
 };

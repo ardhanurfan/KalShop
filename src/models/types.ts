@@ -1,10 +1,10 @@
 import { CartAction, CartModel } from "./cart/types";
-import { ProductsAction, ProductsModel } from "./kalProducts/types";
-
+import { ProductsModel, ProductModel, ProductsAction } from "./products/types";
 
 export interface RootModel {
-  products?: ProductsModel,
-  cart?: CartModel
+  products?: ProductsModel;
+  cart?: CartModel;
+  product?: ProductModel;
 }
 
 export type RootAction = ProductsAction | CartAction;
