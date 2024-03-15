@@ -82,8 +82,16 @@ const Products: PageComponent = () => {
       return [];
     }
     return state.products
-      .filter((product) =>
-        product.title.toLowerCase().includes(search.toLowerCase())
+      .filter(
+        (product) =>
+          product.title.toLowerCase().includes(search.toLowerCase()) ||
+          product.description.toLowerCase().includes(search.toLowerCase()) ||
+          product.category.toLowerCase().includes(search.toLowerCase()) ||
+          product.price
+            .toString()
+            .toLowerCase()
+            .includes(search.toLowerCase()) ||
+          product.stock.toString().toLowerCase().includes(search.toLowerCase())
       )
       .filter(
         (product) => product.category === catergory || catergory === "ALL"
