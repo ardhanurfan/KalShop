@@ -46,3 +46,18 @@ export const API = (token: string, type: string = "Bearer" as const) => {
 
   return fetch;
 };
+
+export const apiUrlProducts = (
+  endpointProducts: string,
+  options: Readonly<FetchURLOptions> = {}
+) => createFetchURL(endpointProducts, {
+  baseURL: window.NX?.env?.apiProducts,
+  ...options
+});
+
+export const APIProducts = () => createFetch({
+  baseURL: window.NX?.env?.apiProducts,
+  headers: {
+    Authorization: `Bearer random`
+  }
+});

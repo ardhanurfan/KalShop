@@ -42,4 +42,4 @@ const Product: PageComponent = () => {
 
 Product.displayName = "Product";
 
-export default Product;
+// export default Product;

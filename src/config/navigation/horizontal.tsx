@@ -1,8 +1,20 @@
-import { Package, Packages, SmartHome, History } from "@nxweb/icons/tabler";
+import { File, Lock, Mail, Pencil, Shield, ShoppingCart, SmartHome } from '@nxweb/icons/tabler';
 
 import type { HorizontalNavItemsType } from "@layouts/types.js";
 
 export const navigation: readonly HorizontalNavItemsType[] = [
+  {
+    icon: <ShoppingCart />,
+    id: 'cart',
+    link: '/cart',
+    text: 'Cart'
+  },
+  {
+    icon: <Pencil />,
+    id: 'add',
+    link: '/products/add',
+    text: 'Add Form'
+  },
   {
     icon: <SmartHome />,
     id: "home",
@@ -21,13 +33,37 @@ export const navigation: readonly HorizontalNavItemsType[] = [
     link: "/history",
     text: "History",
   },
-  // {
-  //   subject: "Administrator",
-  // },
+
   {
     icon: <Packages />,
     id: "manage-products",
     link: "/manage-products",
     text: "Manage Products",
   },
+  {
+    icon: <File />,
+    id: 'misc',
+    text: 'Miscellaneous',
+    title: 'Miscellaneous',
+    children: [
+      {
+        id: 'page-not-found',
+        link: '/pages/misc/404',
+        text: 'Page Not Found - 404',
+        title: 'Page Not Found - 404'
+      },
+      {
+        id: 'not-authorized',
+        link: '/pages/misc/401',
+        text: 'Not Authorized - 401',
+        title: 'Not Authorized - 401'
+      },
+      {
+        id: 'server-error',
+        link: '/pages/misc/500',
+        text: 'Server Error - 500',
+        title: 'Server Error - 500'
+      }
+    ]
+  }
 ];
