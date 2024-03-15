@@ -6,9 +6,6 @@ import { DotsVertical } from "@nxweb/icons/tabler";
 import type { PageComponent } from "@nxweb/react";
 
 import {
-  Card,
-  CardContent,
-  Grid,
   IconButton,
   Menu,
   MenuItem,
@@ -22,11 +19,6 @@ import {
   useTheme,
 } from "@components/material.js";
 import { useCommand, useStore } from "@models/store.js";
-import { Box, Button, CardMedia, Typography } from "@mui/material";
-import ProductCard from "@components/productCard/ProductCard";
-import { title } from "process";
-import { stat } from "fs";
-import ProductHot from "@components/productCard/ProductHot";
 
 const Products: PageComponent = () => {
   const navigate = useNavigate();
@@ -61,53 +53,48 @@ const Products: PageComponent = () => {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  console.log(state);
-
   return (
     <>
-      <Box sx={{ textAlign: "center", justifyContent: "center" }}>
-        <Typography component="h1" variant="h1">
-          Dapatkan Item Terbaik, Cuma Disini
-        </Typography>
-        <Typography component="h5" variant="h5">
-          Barang barang terbaik, pasti ori, pasti kalcer
-        </Typography>
-      </Box>
-      <Box
-        py={2}
-        px={4}
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "flex-start",
-        }}
-      >
-        <ProductCard />
-      </Box>
-
-      <Box sx={{ marginTop: "64px" }}>
-        <Typography component="h1" variant="h1">
-          Lagi laris manies
-        </Typography>
-        <Typography component="h5" variant="h5">
-          bingung pengen checkout apa? coba liat barang disini
-        </Typography>
-      </Box>
-      <Box
-        py={2}
-        px={4}
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "flex-start",
-        }}
-      >
-        <ProductHot />
-      </Box>
-
-      {/* <Menu
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }}>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell align="center" width={40}>
+                Action
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {state?.products?.map((row) => (
+              <TableRow
+                key={row.id}
+                sx={{
+                  "&:last-child td, &:last-child th": {
+                    border: 0,
+                  },
+                  backgroundColor:
+                    id === row.id ? theme.palette.divider : "inherit",
+                }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.id}
+                </TableCell>
+                <TableCell>{row.title}</TableCell>
+                <TableCell>{row.description}</TableCell>
+                <TableCell align="center">
+                  <IconButton onClick={(e) => handleClick(e, row.id)}>
+                    <DotsVertical />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Menu
         anchorEl={anchorEl}
         id="basic-menu"
         open={Boolean(anchorEl)}
@@ -115,7 +102,7 @@ const Products: PageComponent = () => {
       >
         <MenuItem onClick={handleDetail}>Detail</MenuItem>
         <MenuItem>Delete</MenuItem>
-      </Menu> */}
+      </Menu>
     </>
   );
 };

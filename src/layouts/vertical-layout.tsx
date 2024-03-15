@@ -1,42 +1,42 @@
-import type { FC } from 'react';
-import { useState } from 'react';
+import type { FC } from "react";
+import { useState } from "react";
 
-import { ArrowUP } from '@nxweb/icons/tabler';
-import type { LayoutProps as NextWebLayoutProps } from '@nxweb/react/layout';
+import { ArrowUP } from "@nxweb/icons/tabler";
+import type { LayoutProps as NextWebLayoutProps } from "@nxweb/react/layout";
 
-import { Customizer } from '@components/customizer.js';
-import { Footer } from '@components/footer.js';
-import { Box, Fab, styled } from '@components/material.js';
-import type { BoxProps } from '@components/material.js';
-import { ScrollToTop } from '@components/scroll-to-top.js';
-import { config as themeConfig } from '@config/theme.js';
-import type { LayoutProps } from '@layouts/types.js';
+import { Customizer } from "@components/customizer.js";
+import { Footer } from "@components/footer.js";
+import { Box, Fab, styled } from "@components/material.js";
+import type { BoxProps } from "@components/material.js";
+import { ScrollToTop } from "@components/scroll-to-top.js";
+import { config as themeConfig } from "@config/theme.js";
+import type { LayoutProps } from "@layouts/types.js";
 
-import { VerticalAppBar } from './components/vertical/app-bar.js';
-import { Navigation } from './components/vertical/navigation.js';
+import { VerticalAppBar } from "./components/vertical/app-bar.js";
+import { Navigation } from "./components/vertical/navigation.js";
 
-const VerticalLayoutWrapper = styled('div')({
-  display: 'flex',
-  height: '100%'
+const VerticalLayoutWrapper = styled("div")({
+  display: "flex",
+  height: "100%",
 });
 
 const MainContentWrapper = styled(Box)<BoxProps>({
-  display: 'flex',
-  flexDirection: 'column',
+  display: "flex",
+  flexDirection: "column",
   flexGrow: 1,
-  minHeight: '100vh',
-  minWidth: 0
+  minHeight: "100vh",
+  minWidth: 0,
 });
 
-const ContentWrapper = styled('main')(({ theme }) => ({
+const ContentWrapper = styled("main")(({ theme }) => ({
   flexGrow: 1,
   padding: theme.spacing(6),
-  transition: 'padding .25s ease-in-out',
-  width: '100%',
-  [theme.breakpoints.down('sm')]: {
+  transition: "padding .25s ease-in-out",
+  width: "100%",
+  [theme.breakpoints.down("sm")]: {
     paddingLeft: theme.spacing(4),
-    paddingRight: theme.spacing(4)
-  }
+    paddingRight: theme.spacing(4),
+  },
 }));
 
 type VerticalLayoutProps = LayoutProps & NextWebLayoutProps;
@@ -50,13 +50,14 @@ const VerticalLayout: FC<VerticalLayoutProps> = (props) => {
     scrollToTop,
     footerProps,
     contentHeightFixed,
-    verticalLayoutProps
+    verticalLayoutProps,
   } = props;
 
   // ** Vars
   const { skin, navHidden, contentWidth } = settings;
-  const navigationBorderWidth = skin === 'bordered' ? 1 : 0;
-  const { navigationSize, disableCustomizer, collapsedNavigationSize } = themeConfig;
+  const navigationBorderWidth = skin === "bordered" ? 1 : 0;
+  const { navigationSize, disableCustomizer, collapsedNavigationSize } =
+    themeConfig;
   const navWidth = navigationSize;
   const collapsedNavWidth = collapsedNavigationSize;
 
@@ -70,9 +71,8 @@ const VerticalLayout: FC<VerticalLayoutProps> = (props) => {
     <>
       <VerticalLayoutWrapper className="layout-wrapper">
         {/* Navigation Menu */}
-        {navHidden && !(navHidden && settings.lastLayout === 'horizontal')
-          ? null
-          : (
+        {navHidden &&
+        !(navHidden && settings.lastLayout === "vertical") ? null : (
           <Navigation
             afterNavMenuContent={verticalLayoutProps.navMenu.afterContent}
             beforeNavMenuContent={verticalLayoutProps.navMenu.beforeContent}
@@ -88,41 +88,47 @@ const VerticalLayout: FC<VerticalLayoutProps> = (props) => {
             setNavVisible={setNavVisible}
             toggleNavVisibility={toggleNavVisibility}
             verticalNavItems={verticalLayoutProps.navMenu.navItems}
-            {...props} />
-          )}
+            {...props}
+          />
+        )}
         <MainContentWrapper
           className="layout-content-wrapper"
-          sx={{ ...contentHeightFixed && { maxHeight: '100vh' } }}
+          sx={{ ...(contentHeightFixed && { maxHeight: "100vh" }) }}
         >
           {/* AppBar Component */}
           <VerticalAppBar
             appBarContent={verticalLayoutProps.appBar?.content}
             appBarProps={verticalLayoutProps.appBar?.componentProps}
             toggleNavVisibility={toggleNavVisibility}
-            {...props} />
+            {...props}
+          />
 
           {/* Content */}
           <ContentWrapper
             className="layout-page-content"
             sx={{
-              ...contentHeightFixed && {
-                overflow: 'hidden',
+              ...(contentHeightFixed && {
+                overflow: "hidden",
 
-                '& > :first-of-type': { height: '100%' }
-              },
-              ...contentWidth === 'boxed' && {
-                mx: 'auto',
+                "& > :first-of-type": { height: "100%" },
+              }),
+              ...(contentWidth === "boxed" && {
+                mx: "auto",
 
-                '@media (min-width:1200px)': { maxWidth: '100%' },
-                '@media (min-width:1440px)': { maxWidth: 1440 }
-              }
+                "@media (min-width:1200px)": { maxWidth: "100%" },
+                "@media (min-width:1440px)": { maxWidth: 1440 },
+              }),
             }}
           >
             {children}
           </ContentWrapper>
 
           {/* Footer Component */}
-          <Footer footerContent={footerProps?.content} footerStyles={footerProps?.sx} {...props} />
+          <Footer
+            footerContent={footerProps?.content}
+            footerStyles={footerProps?.sx}
+            {...props}
+          />
         </MainContentWrapper>
       </VerticalLayoutWrapper>
 
@@ -130,20 +136,19 @@ const VerticalLayout: FC<VerticalLayoutProps> = (props) => {
       {disableCustomizer || hidden ? null : <Customizer />}
 
       {/* Scroll to top button */}
-      {scrollToTop
-        ? scrollToTop(props)
-
-        : (
+      {scrollToTop ? (
+        scrollToTop(props)
+      ) : (
         <ScrollToTop className="mui-fixed">
           <Fab aria-label="scroll back to top" color="primary" size="small">
             <ArrowUP />
           </Fab>
         </ScrollToTop>
-        )}
+      )}
     </>
   );
 };
 
-VerticalLayout.displayName = 'VerticalLayout';
+VerticalLayout.displayName = "VerticalLayout";
 
 export { VerticalLayout };

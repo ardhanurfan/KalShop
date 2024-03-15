@@ -10,9 +10,11 @@ import productIcon from "../../assets/productImg/produk.png";
 import { useSelector } from "react-redux";
 import { useStore } from "@models/store";
 
-const ProductCard = () => {
+const ProductHot = () => {
   const [state, dispatch] = useStore((store) => store.products);
-  const render = state?.products?.map((item) => {
+  const filtered = state?.products?.filter((product) => product.rating > 4.8);
+  console.log(filtered);
+  const render = filtered?.map((item) => {
     return (
       <div>
         <Card
@@ -42,4 +44,4 @@ const ProductCard = () => {
   return render;
 };
 
-export default ProductCard;
+export default ProductHot;

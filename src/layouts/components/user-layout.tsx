@@ -1,13 +1,13 @@
-import { cloneElement,  isValidElement,  useEffect, useRef } from 'react';
-import type { FC } from 'react';
+import { cloneElement, isValidElement, useEffect, useRef } from "react";
+import type { FC } from "react";
 
-import type { LayoutWrapperProps } from '@nxweb/react/layout';
+import type { LayoutWrapperProps } from "@nxweb/react/layout";
 
-import type { Theme } from '@components/material.js';
-import { useMediaQuery } from '@components/material.js';
-import { navigation as horizontalNavItems } from '@config/navigation/horizontal.js';
-import { navigation as verticalNavItems } from '@config/navigation/vertical.js';
-import { useSettings } from '@hooks/use-settings.js';
+import type { Theme } from "@components/material.js";
+import { useMediaQuery } from "@components/material.js";
+import { navigation as horizontalNavItems } from "@config/navigation/horizontal.js";
+import { navigation as verticalNavItems } from "@config/navigation/vertical.js";
+import { useSettings } from "@hooks/use-settings.js";
 
 /*
  * ** Component Import
@@ -16,8 +16,8 @@ import { useSettings } from '@hooks/use-settings.js';
  * import ServerSideHorizontalNavItems from './components/horizontal/ServerSideNavItems'
  */
 
-import { AppBarContent as HorizontalAppBarContent } from './horizontal/app-bar-content.js';
-import { AppBarContent as VerticalAppBarContent } from './vertical/app-bar-content.js';
+import { AppBarContent as HorizontalAppBarContent } from "./horizontal/app-bar-content.js";
+import { AppBarContent as VerticalAppBarContent } from "./vertical/app-bar-content.js";
 
 const UserLayout: FC<LayoutWrapperProps> = ({
   children = undefined,
@@ -41,20 +41,24 @@ const UserLayout: FC<LayoutWrapperProps> = ({
    *  to know more about what values can be passed to this hook.
    *  ! Do not change this value unless you know what you are doing. It can break the template.
    */
-  const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));
+  const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down("lg"));
 
-  if (hidden && settings.layout === 'horizontal') {
-    settings.layout = 'vertical';
+  if (hidden && settings.layout === "horizontal") {
+    settings.layout = "vertical";
   }
 
   useEffect(() => {
     if (hidden) {
       if (settings.navCollapsed) {
-        saveSettings({ ...settings, layout: 'vertical', navCollapsed: false });
+        saveSettings({ ...settings, layout: "vertical", navCollapsed: false });
         isCollapsed.current = true;
       }
     } else if (isCollapsed.current) {
-      saveSettings({ ...settings, layout: settings.lastLayout, navCollapsed: true });
+      saveSettings({
+        ...settings,
+        layout: settings.lastLayout,
+        navCollapsed: true,
+      });
       isCollapsed.current = false;
     } else if (settings.lastLayout !== settings.layout) {
       saveSettings({ ...settings, layout: settings.lastLayout });
@@ -77,33 +81,38 @@ const UserLayout: FC<LayoutWrapperProps> = ({
             hidden={hidden}
             saveSettings={saveSettings}
             settings={settings}
-            toggleNavVisibility={props.toggleNavVisibility} />
-        )
+            toggleNavVisibility={props.toggleNavVisibility}
+          />
+        ),
       },
       navMenu: {
-        navItems: verticalNavItems
+        navItems: verticalNavItems,
 
         /*
          * Uncomment the below line when using server-side menu in vertical layout and comment the above line
          * navItems: verticalMenuItems
          */
-      }
+      },
     },
-    ...settings.layout === 'horizontal' && {
+    ...(settings.layout === "horizontal" && {
       horizontalLayoutProps: {
         appBar: {
-          content: () => <HorizontalAppBarContent saveSettings={saveSettings} settings={settings} />
+          content: () => (
+            <HorizontalAppBarContent
+              saveSettings={saveSettings}
+              settings={settings}
+            />
+          ),
         },
         navMenu: {
-          navItems: horizontalNavItems
-
+          navItems: horizontalNavItems,
           /*
            * Uncomment the below line when using server-side menu in horizontal layout and comment the above line
            * navItems: horizontalMenuItems
            */
-        }
-      }
-    }
+        },
+      },
+    }),
   };
 
   return isValidElement(children)
@@ -111,6 +120,6 @@ const UserLayout: FC<LayoutWrapperProps> = ({
     : null;
 };
 
-UserLayout.displayName = 'UserLayout';
+UserLayout.displayName = "UserLayout";
 
 export { UserLayout };
