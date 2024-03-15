@@ -1,9 +1,9 @@
 export const app = {
-  name: 'App Name',
-  title: 'App Title',
-  url: '/',
+  name: "KalShop",
+  title: "KalShop",
+  url: "/",
 
-  description: 'App Description',
+  description: "App Description",
 
-  keywords: ['NextWeb']
+  keywords: ["NextWeb"],
 };
