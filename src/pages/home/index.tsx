@@ -1,37 +1,60 @@
-import type { PageComponent } from '@nxweb/react';
+import type { PageComponent } from "@nxweb/react";
 
-import { Card, CardContent, CardHeader, Grid, Typography } from '@components/material.js';
+import { Box, Typography } from "@components/material.js";
+import CarouselBanner from "./_components/carousel-banner";
+import RecommendedProducts from "./_components/recommended-products";
+import { getProducts } from "@api/clients/products";
+import { productsCommand } from "@models/products/commands";
+import { useCommand, useStore } from "@models/store";
+import { useEffect, useMemo } from "react";
+import Categories from "./_components/categories";
 
 const Home: PageComponent = () => {
+  const [productsState, dispatch] = useStore((store) => store.products);
+  const command = useCommand((cmd) => cmd);
+
+  const recommended = useMemo(() => {
+    if (!productsState || !productsState.products) {
+      return [];
+    }
+
+    return productsState.products
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, 12);
+  }, [productsState]);
+
+  const categories = useMemo(() => {
+    if (!productsState || !productsState.products) {
+      return [];
+    }
+
+    let categories: string[] = [];
+    productsState.products.forEach((product) => {
+      if (!categories.includes(product.category)) {
+        categories.push(product.category);
+      }
+    });
+
+    return categories;
+  }, [productsState]);
+
+  useEffect(() => {
+    dispatch(command.products.load(""));
+
+    return () => {
+      dispatch(command.products.clear());
+    };
+  }, []);
+
   return (
-    <Grid container={true} spacing={6}>
-      <Grid item={true} xs={12}>
-        <Card>
-          <CardHeader title="Kick start your project 🚀" />
-          <CardContent>
-            <Typography sx={{ mb: 2 }}>All the best for your new project.</Typography>
-            <Typography>
-              Please make sure to read our Template Documentation to understand where to go from here and how to use our
-              template.
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item={true} xs={12}>
-        <Card>
-          <CardHeader title="ACL and JWT 🔒" />
-          <CardContent>
-            <Typography sx={{ mb: 2 }}>
-              Access Control (ACL) and Authentication (JWT) are the two main security features of our template and are implemented in the starter-kit as well.
-            </Typography>
-            <Typography>Please read our Authentication and ACL Documentations to get more out of them.</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-    </Grid>
+    <Box>
+      <CarouselBanner />
+      <Categories categories={categories} />
+      <RecommendedProducts products={recommended} />
+    </Box>
   );
 };
 
-Home.displayName = 'Home';
+Home.displayName = "Home";
 
 export default Home;
