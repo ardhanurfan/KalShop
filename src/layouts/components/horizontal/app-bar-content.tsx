@@ -1,24 +1,42 @@
-import type { FC } from 'react';
+import type { FC } from "react";
 
-import { Box } from '@components/material.js';
-import { ModeToggler } from '@components/mode-toggler.js';
-import { UserDropdown } from '@components/user-dropdown.js';
-import type { Settings } from '@hooks/use-settings.js';
+import { Box } from "@components/material.js";
+import { ModeToggler } from "@components/mode-toggler.js";
+import { UserDropdown } from "@components/user-dropdown.js";
+import type { Settings } from "@hooks/use-settings.js";
+import { Search } from "@nxweb/icons/tabler";
+import { InputBase } from "@mui/material";
 
 interface Props {
-  readonly saveSettings: (values: Settings) => void
-  readonly settings: Settings
+  readonly saveSettings: (values: Settings) => void;
+  readonly settings: Settings;
 }
 
 const AppBarContent: FC<Props> = ({ settings, saveSettings }) => {
   return (
-    <Box sx={{ alignItems: 'center', display: 'flex' }}>
+    <Box sx={{ alignItems: "center", display: "flex" }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyItems: "center",
+          borderRadius: 2,
+          paddingY: 1,
+          paddingX: 3,
+          gap: 3,
+          marginRight: 2,
+          backgroundColor: (theme) => theme.palette.background.default,
+        }}
+      >
+        <Search height={20} width={20} />
+        <InputBase placeholder="Search..."></InputBase>
+      </Box>
       <ModeToggler saveSettings={saveSettings} settings={settings} />
       <UserDropdown settings={settings} />
     </Box>
   );
 };
 
-AppBarContent.displayName = 'AppBarContent';
+AppBarContent.displayName = "AppBarContent";
 
 export { AppBarContent };

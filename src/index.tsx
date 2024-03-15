@@ -1,22 +1,22 @@
-import { lazy, StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { lazy, StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 
-import { ServiceWorker } from '@nxweb/core';
-import { BrowserRouter, disableReactDevTools } from '@nxweb/react';
-import { PageSpinner, Toast } from '@nxweb/react-bootstrap';
+import { ServiceWorker } from "@nxweb/core";
+import { BrowserRouter, disableReactDevTools } from "@nxweb/react";
+import { PageSpinner, Toast } from "@nxweb/react-bootstrap";
 
-import { layouts } from '@config/layout.js';
-import { routes } from '@config/routes.js';
-import { StoreProvider } from '@models/store.js';
+import { layouts } from "@config/layout.js";
+import { routes } from "@config/routes.js";
+import { StoreProvider } from "@models/store.js";
 
-import App from './_app.js';
+import App from "./_app.js";
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   disableReactDevTools();
 }
 
-const root = createRoot(document.getElementById('root') as HTMLElement);
-const error = lazy(() => import('@views/errors/route.js'));
+const root = createRoot(document.getElementById("root") as HTMLElement);
+const error = lazy(() => import("@views/errors/route.js"));
 
 root.render(
   <StrictMode>
@@ -27,12 +27,14 @@ root.render(
         layouts={layouts}
         resolvePages={true}
         routes={routes}
-        wrapper={App} />
+        wrapper={App}
+      />
 
       <Toast.Container
         closeOnClick={true}
         draggable={false}
-        pauseOnFocusLoss={false} />
+        pauseOnFocusLoss={false}
+      />
     </StoreProvider>
   </StrictMode>
 );
