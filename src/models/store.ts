@@ -7,10 +7,10 @@ import {
 } from "@nxweb/react";
 
 import type { RootAction, RootModel } from "./types.js";
-import { CartCommand } from "./cart/commands.js";
-import { CartReducers, initState } from "./cart/reducers.js";
 import { ProductsReducer } from "./products/reducers.js";
 import { ProductsCommand } from "./products/commands.js";
+import { CartReducers } from "./cart/reducers.js";
+import { CartCommand } from "./cart/commands.js";
 
 // ** Init reducers
 const rootReducer = combineReducers({
@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
 // ** Init models
 const rootModel: RootModel = {
   products: {},
-  cart: initState,
+  cart: { id: 0, products: []}
 };
 
 // ** Init commands
