@@ -49,13 +49,7 @@ function RecommendedProducts({ products }: { products: Product[] }) {
                   >
                     {"$" + product.price}
                   </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "end",
-                      alignItems: "center",
-                    }}
-                  >
+                  <Box>
                     <Star color="#FFD700" fill="#FFD700" />
                     <Typography
                       variant="h5"

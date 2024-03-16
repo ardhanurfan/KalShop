@@ -5,6 +5,18 @@ import type { PageComponent } from "@nxweb/react";
 
 import { Chip } from "@components/material.js";
 import { useCommand, useStore } from "@models/store.js";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Button,
+  Grid,
+  Box,
+  Input,
+  TextField,
+} from "@mui/material";
+import { Star } from "@nxweb/icons/tabler";
 
 const Product: PageComponent = () => {
   const { id } = useParams();
@@ -29,13 +41,61 @@ const Product: PageComponent = () => {
 
   return (
     <>
-      <h1 css={{ alignItems: "center", display: "flex", gap: "1rem" }}>
-        {product?.title}
-        <Chip label={product?.title ?? "..."} />
-      </h1>
+      <Box
+        sx={{ display: "flex", flexDirection: "row", justifyContent: "center" }}
+      >
+        <img style={{ width: "30%" }} src={product?.images[0]} />
 
-      <div>{product?.description}</div>
-      <pre>{product ? JSON.stringify(product, null, 2) : null}</pre>
+        <Box sx={{ marginLeft: "16px" }}>
+          <Typography
+            component="h1"
+            variant="h1"
+            css={{ alignItems: "center", display: "flex", gap: "1rem" }}
+          >
+            {product?.title}
+            <Chip label={product?.brand ?? "..."} />
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "start",
+              alignItems: "center",
+            }}
+          >
+            <Star color="#FFD700" fill="#FFD700" />
+            <Typography>{product?.rating}</Typography>
+          </Box>
+          <Typography
+            variant="h4"
+            color={(theme) => theme.palette.primary.main}
+            marginTop="16px"
+          >
+            ${product?.price}
+          </Typography>
+          <Typography style={{ marginTop: "24px" }} variant="body1">
+            {product?.description}
+          </Typography>
+
+          <Box display="flex" flexDirection="row" marginTop="54px">
+            {" "}
+            <TextField
+              id="filled-number"
+              label="Quantity"
+              type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="filled"
+              style={{ width: "150px", marginRight: "32px" }}
+            />
+            <Button style={{}} variant="contained">
+              Add to Cart
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+
+      {/* <pre>{product ? JSON.stringify(product, null, 2) : null}</pre> */}
     </>
   );
 };
