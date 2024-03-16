@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import type { PageComponent } from "@nxweb/react";
@@ -12,11 +12,22 @@ const Product: PageComponent = () => {
   const { id } = useParams();
   const [state, dispatch] = useStore((store) => store.products);
   const command = useCommand((cmd) => cmd);
+  const [quantity, setQuantity] = useState(1);
 
   const product = useMemo(
     () => state?.products?.find((o) => o.id.toString() === id),
     [state, id]
   );
+
+  const handleQuantityChange = (e: { target: { value: string } }) => {
+    const newQuantity = parseInt(e.target.value);
+    console.log("New Quantity:", newQuantity); // Log the new quantity
+    setQuantity(newQuantity);
+    return newQuantity;
+  };
+  const handleSubmit = () => {
+    console.log(`anda beli ${quantity}`);
+  };
 
   useEffect(() => {
     dispatch(command.products.getAllProducts()).catch((err: unknown) => {
@@ -77,8 +88,9 @@ const Product: PageComponent = () => {
               }}
               variant="filled"
               style={{ width: "150px", marginRight: "32px" }}
+              onChange={handleQuantityChange}
             />
-            <Button style={{}} variant="contained">
+            <Button style={{}} variant="contained" onClick={handleSubmit}>
               Add to Cart
             </Button>
           </Box>

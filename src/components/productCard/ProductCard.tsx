@@ -5,6 +5,7 @@ import { Star } from "@nxweb/icons/tabler";
 
 const ProductCard = () => {
   const [state, dispatch] = useStore((store) => store.products);
+  console.log(state);
   const render = state?.products?.map((item) => {
     return (
       <div>

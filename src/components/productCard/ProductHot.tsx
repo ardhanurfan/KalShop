@@ -5,9 +5,6 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import React from "react";
-import productIcon from "../../assets/productImg/produk.png";
-import { useSelector } from "react-redux";
 import { useStore } from "@models/store";
 
 const ProductHot = () => {
