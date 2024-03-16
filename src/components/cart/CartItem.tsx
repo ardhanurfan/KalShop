@@ -1,5 +1,6 @@
-import { CartAction, CartActionType, CartItemType } from "@models/cart/types";
-import { useCommand, useStore } from "@models/store";
+import { CartAction } from "@models/cart/types";
+import type { CartItem } from "@models/cart/types";
+import { useCommand } from "@models/store";
 import {
   Box,
   Grid,
@@ -14,7 +15,7 @@ import { X } from "@nxweb/icons/tabler";
 import { ChangeEvent, useState } from "react";
 
 interface PropsType {
-  data: CartItemType;
+  data: CartItem;
   dispatch: React.Dispatch<CartAction>;
 }
 
@@ -26,7 +27,7 @@ const CartItem = ({data, dispatch}: PropsType) => {
   }
 
   const handleQtyChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(command.editQty({ ...data, qty: +e.target.value }))
+    dispatch(command.editQty({ ...data, quantity: +e.target.value }))
   }
 
   return (
@@ -45,7 +46,7 @@ const CartItem = ({data, dispatch}: PropsType) => {
           <ListItemText primary={data.title} />
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography sx={{ mr: 2, color: "text.disabled" }}>
-              Sold By:
+              Discount:
             </Typography>
             <Typography
               sx={{
@@ -54,7 +55,7 @@ const CartItem = ({data, dispatch}: PropsType) => {
                 textDecoration: "none",
               }}
             >
-              {data.brand}
+              {(data.discountPercentage).toFixed(2)}%
             </Typography>
           </Box>
         </Grid>
@@ -75,8 +76,8 @@ const CartItem = ({data, dispatch}: PropsType) => {
             <TextField
               label="Qty"
               type="number"
-              defaultValue={data.qty}
-              InputProps={{ inputProps: { min: 1, max: data.stock, step: 1 } }}
+              defaultValue={data.quantity}
+              InputProps={{ inputProps: { min: 1, max: 20, step: 1 } }}
               sx={{ width: "100px" }}
               onChange={handleQtyChange}
             />
@@ -94,7 +95,7 @@ const CartItem = ({data, dispatch}: PropsType) => {
             }}
           >
             <Box sx={{ display: "flex" }}>
-              <Typography sx={{ color: "primary.main" }}>{data.price - (data.price * data.discountPercentage / 100)}</Typography>
+              <Typography sx={{ color: "primary.main" }}>{(data.price - (data.price * data.discountPercentage / 100)).toFixed(2)}</Typography>
               <Typography
                 sx={{
                   color: "text.disabled",

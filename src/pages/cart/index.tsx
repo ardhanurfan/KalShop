@@ -32,35 +32,41 @@ const Cart = () => {
   const [state, dispatch] = useStore((store) => store.cart);
   const command = useCommand((cmd) => cmd.cart);
 
-  console.log(state);
-
   const orderPlaced = () => {
-    dispatch(command.submit);
+    dispatch(command.clear);
     setPlaced(true);
   };
+
+  useEffect(() => {
+    dispatch(command.getCart());
+
+    return () => {
+      dispatch(command.clear())
+    }
+  }, [])
 
   useEffect(() => {
     let qtyTotal = 0;
     let orderTotal = 0;
 
-    state?.cart?.forEach((item) => {
-      qtyTotal += item.qty;
-      orderTotal += item.qty * (item.price - (item.price * item.discountPercentage / 100));
+    state?.products.forEach((item) => {
+      qtyTotal += item.quantity;
+      orderTotal += item.quantity * (item.price - (item.price * item.discountPercentage / 100));
     });
 
     setBill({
       qty: qtyTotal,
-      orderTotal: orderTotal,
-      total: orderTotal + 5
+      orderTotal: +orderTotal.toFixed(2),
+      total: +(orderTotal + 5).toFixed(2)
     })
-  }, [state?.cart])
+  }, [state])
 
   return (
     <Card>
       <CardContent sx={{ my: 5 }}>
         {placed ? (
           <OrderPlaced />
-        ) : state?.cart?.length ? (
+        ) : state?.products.length ? (
           <>
             {/* =========================== NOT EMPTY =========================== */}
             <Box>
@@ -74,10 +80,10 @@ const Cart = () => {
                   borderRadius: "10px",
                 }}
               >
-                {state?.cart?.map((item, index) => (
+                {state?.products.map((item, index) => (
                   <>
                     <CartItem key={item.id} data={item} dispatch={dispatch} />
-                    {index < (state.cart?.length ?? 0) - 1 && (
+                    {index < (state.products.length ?? 0) - 1 && (
                       <Divider sx={{ mt: "0" }} />
                     )}
                   </>

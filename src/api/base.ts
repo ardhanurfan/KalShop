@@ -63,3 +63,20 @@ export const APIProducts = () =>
       Authorization: `Bearer random`,
     },
   });
+
+export const apiUrlCart = (
+  endpointCart: string,
+  options: Readonly<FetchURLOptions> = {}
+) =>
+  createFetchURL(endpointCart, {
+    baseURL: window.NX.env.productsURL,
+    ...options,
+  });
+
+export const APICart = () =>
+  createFetch({
+    baseURL: window.NX.env.productsURL,
+    headers: {
+      Authorization: `Bearer random`,
+    },
+  });
