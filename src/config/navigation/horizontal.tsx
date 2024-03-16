@@ -1,4 +1,4 @@
-import { File, Lock, Mail, Pencil, Shield, ShoppingCart, SmartHome } from '@nxweb/icons/tabler';
+import { File, Lock, Mail, Pencil, Shield, ShoppingCart, SmartHome, Package, History, Packages } from '@nxweb/icons/tabler';
 
 import type { HorizontalNavItemsType } from "@layouts/types.js";
 
