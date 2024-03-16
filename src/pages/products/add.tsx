@@ -10,31 +10,23 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useDropzone } from "react-dropzone";
 import { Upload } from "@nxweb/icons/tabler";
+import { useCommand, useStore } from "@models/store";
+import toTitleCase from "@lib/toTitleCase";
+import { Product } from "@models/products/types";
+import { postProduct } from "@api/clients/products";
+import { useNavigate } from "react-router-dom";
 
-interface FileProp {
-  name: string;
-  type: string;
-  size: number;
-}
-
-interface ProductInput {
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: FileProp;
-  images: FileProp[];
-}
+// interface FileProp {
+//   name: string;
+//   type: string;
+//   size: number;
+// }
 
 const defaultValues = {
   title: "",
@@ -43,45 +35,52 @@ const defaultValues = {
   category: "",
 };
 
-interface CategoryTypes {
-  name: string;
-  value: string;
-}
-
-const categories: CategoryTypes[] = [
-  {
-    name: "Smartphone",
-    value: "smartphone",
-  },
-  {
-    name: "Laptops",
-    value: "laptops",
-  },
-  {
-    name: "Fragrance",
-    value: "fragrance",
-  },
-  {
-    name: "Groceries",
-    value: "groceries",
-  },
-  {
-    name: "Home Decoration",
-    value: "home-decoration",
-  },
-];
-
 const AddForm = () => {
+  const navigate = useNavigate();
+  const [productsState, dispatch] = useStore((store) => store.products);
+  const command = useCommand((cmd) => cmd.products);
+  const categories = useMemo(() => {
+    if (!productsState || !productsState.products) {
+      return [];
+    }
+
+    let categories: string[] = [];
+    productsState.products.forEach((product) => {
+      if (!categories.includes(product.category)) {
+        categories.push(product.category);
+      }
+    });
+
+    return categories;
+  }, [productsState]);
+
+  useEffect(() => {
+    dispatch(command.getAllProducts());
+  }, []);
+
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProductInput>({ defaultValues });
+  } = useForm<Product>({ defaultValues });
 
-  const onSubmit = () => {
-    errors
-      ? toast.error("Please fill the required fields")
-      : toast.success("Form Submitted");
+  const onSubmit: SubmitHandler<Product> = async (data) => {
+    try {
+      if (!files.length) {
+        toast.error("Please upload a thumbnail.");
+        return;
+      }
+      dispatch(
+        command.addProduct({
+          ...data,
+          thumbnail: URL.createObjectURL(files[0] as any),
+        })
+      );
+      toast.success("Form submitted successfully!");
+      navigate("/manage-products");
+    } catch (error) {
+      toast.error("An error occurred while submitting the form.");
+    }
   };
 
   const [files, setFiles] = useState<File[]>([]);
@@ -96,7 +95,7 @@ const AddForm = () => {
     },
   });
 
-  const img = files.map((file: FileProp) => (
+  const img = files.map((file: File) => (
     <img
       style={{ maxHeight: 430 }}
       key={file.name}
@@ -153,8 +152,8 @@ const AddForm = () => {
                     })}
                   >
                     {categories.map((category) => (
-                      <MenuItem value={category.value}>
-                        {category.name}
+                      <MenuItem key={category} value={category}>
+                        {toTitleCase(category)}
                       </MenuItem>
                     ))}
                   </TextField>
@@ -294,8 +293,8 @@ const AddForm = () => {
                   sx={{ margin: "0px 5px 5px 5px" }}
                 >
                   Thumbnail
+                  <input {...getInputProps()} />
                 </Typography>
-                <input {...getInputProps()} />
                 {files.length ? (
                   <Box
                     sx={{
@@ -341,7 +340,7 @@ const AddForm = () => {
               </Box>
             </Grid>
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" onClick={onSubmit}>
+              <Button type="submit" variant="contained">
                 Submit
               </Button>
               <Toaster />

@@ -32,12 +32,13 @@ import {
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
 import { Product } from "@models/products/types";
+import toTitleCase from "@lib/toTitleCase";
 
 const Products: PageComponent = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [state, dispatch] = useStore((store) => store.products);
-  const command = useCommand((cmd) => cmd);
+  const command = useCommand((cmd) => cmd.products);
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [id, setId] = useState<number | null>(null);
@@ -124,13 +125,7 @@ const Products: PageComponent = () => {
   };
 
   useEffect(() => {
-    dispatch(command.products.getAllProducts()).catch((err: unknown) => {
-      console.error(err);
-    });
-
-    return () => {
-      dispatch(command.products.clear());
-    };
+    dispatch(command.getAllProducts());
   }, []);
 
   // Table handler
@@ -241,7 +236,7 @@ const Products: PageComponent = () => {
             </MenuItem>
             {categories.map((category) => (
               <MenuItem key={category} value={category}>
-                {category}
+                {toTitleCase(category)}
               </MenuItem>
             ))}
           </Select>
@@ -275,6 +270,7 @@ const Products: PageComponent = () => {
             Delete
           </Button>
           <Button
+            onClick={() => navigate("/products/add")}
             variant="contained"
             color="primary"
             startIcon={<Plus height={20} width={20} />}
@@ -358,7 +354,7 @@ const Products: PageComponent = () => {
                   {row.id}
                 </TableCell>
                 <TableCell align="left">{row.title}</TableCell>
-                <TableCell align="left">{row.category}</TableCell>
+                <TableCell align="left">{toTitleCase(row.category)}</TableCell>
                 <TableCell align="left">
                   <img
                     style={{

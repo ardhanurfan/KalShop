@@ -5,7 +5,7 @@ import type { RootModel } from "@models/types.js";
 import { ProductsActionType } from "./types.js";
 
 import type { Product, ProductsAction, ProductsModel } from "./types.js";
-import { getAllProducts } from "@api/clients/products.js";
+import { getAllProducts, postProduct } from "@api/clients/products.js";
 
 const ProductsCommand = {
   clear: (): ProductsAction => {
@@ -21,17 +21,28 @@ const ProductsCommand = {
         };
 
         if (products) {
-          const payload: ProductsModel = {
-            products: products,
-          };
-
           dispatch({
             type: ProductsActionType.GET_PRODUCTS,
-            payload,
+            payload: products,
           });
         }
       } catch (err) {
         console.error(err);
+      }
+    };
+  },
+  addProduct: (product: Product, options?: Readonly<FetchURLOptions>) => {
+    return async (dispatch) => {
+      try {
+        const res = await postProduct(product, options);
+        if (res.data) {
+          dispatch({
+            type: ProductsActionType.ADD_PRODUCT,
+            payload: product,
+          });
+        }
+      } catch (err) {
+        throw err;
       }
     };
   },
