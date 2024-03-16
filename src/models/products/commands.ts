@@ -1,31 +1,33 @@
 import type { Command, FetchURLOptions } from "@nxweb/core";
 
-import { getProducts } from "@api/clients/products.js";
 import type { RootModel } from "@models/types.js";
 
 import { ProductsActionType } from "./types.js";
 
-import type { ProductsAction, ProductsModel } from "./types.js";
+import type { Product, ProductsAction, ProductsModel } from "./types.js";
+import { getAllProducts } from "@api/clients/products.js";
 
-const productsCommand = {
+const ProductsCommand = {
   clear: (): ProductsAction => {
     return {
-      type: ProductsActionType.Clear,
+      type: ProductsActionType.CLEAR,
     };
   },
-  load: (token: string, options?: Readonly<FetchURLOptions>) => {
+  getAllProducts: (options?: Readonly<FetchURLOptions>) => {
     return async (dispatch) => {
       try {
-        const res = await getProducts(token, options);
+        const { products } = (await getAllProducts(options)) as {
+          products: Product[];
+        };
 
-        if (res) {
-          const value: ProductsModel = {
-            products: res,
+        if (products) {
+          const payload: ProductsModel = {
+            products: products,
           };
 
           dispatch({
-            type: ProductsActionType.Load,
-            value,
+            type: ProductsActionType.GET_PRODUCTS,
+            payload,
           });
         }
       } catch (err) {
@@ -35,4 +37,4 @@ const productsCommand = {
   },
 } satisfies Command<RootModel, ProductsAction>;
 
-export { productsCommand };
+export { ProductsCommand };

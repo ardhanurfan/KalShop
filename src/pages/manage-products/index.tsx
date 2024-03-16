@@ -124,7 +124,7 @@ const Products: PageComponent = () => {
   };
 
   useEffect(() => {
-    dispatch(command.products.load("")).catch((err: unknown) => {
+    dispatch(command.products.getAllProducts()).catch((err: unknown) => {
       console.error(err);
     });
 

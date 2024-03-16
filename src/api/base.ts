@@ -3,20 +3,20 @@ import type { FetchURLOptions } from "@nxweb/core";
 
 // import { apiMock } from "./mock.js";
 
-export const apiURL = (
-  endpoint: string,
-  options: Readonly<FetchURLOptions> = {}
-) => {
-  return createFetchURL(
-    endpoint,
-    compact({
-      ...options,
-      get baseURL() {
-        return options.baseURL ?? window.NX.env.apiURL;
-      },
-    })
-  );
-};
+// export const apiURL = (
+//   endpoint: string,
+//   options: Readonly<FetchURLOptions> = {}
+// ) => {
+//   return createFetchURL(
+//     endpoint,
+//     compact({
+//       ...options,
+//       get baseURL() {
+//         return options.baseURL ?? window.NX.env.apiURL;
+//       },
+//     })
+//   );
+// };
 
 // export const API = (
 //   token: string,
@@ -34,30 +34,32 @@ export const apiURL = (
 
 //   return mocked ? apiMock(fetch) : fetch;
 // };
-export const API = (token: string, type: string = "Bearer" as const) => {
-  const fetch = createFetch({
-    get baseURL() {
-      return window.NX.env.apiURL;
-    },
-    headers: compact({
-      authorization: [type, token].filter(Boolean).join(" "),
-    }),
-  });
+// export const API = (token: string, type: string = "Bearer" as const) => {
+//   const fetch = createFetch({
+//     get baseURL() {
+//       return window.NX.env.apiURL;
+//     },
+//     headers: compact({
+//       authorization: [type, token].filter(Boolean).join(" "),
+//     }),
+//   });
 
-  return fetch;
-};
+//   return fetch;
+// };
 
 export const apiUrlProducts = (
   endpointProducts: string,
   options: Readonly<FetchURLOptions> = {}
-) => createFetchURL(endpointProducts, {
-  baseURL: window.NX?.env?.apiProducts,
-  ...options
-});
+) =>
+  createFetchURL(endpointProducts, {
+    baseURL: window.NX?.env?.apiURL,
+    ...options,
+  });
 
-export const APIProducts = () => createFetch({
-  baseURL: window.NX?.env?.apiProducts,
-  headers: {
-    Authorization: `Bearer random`
-  }
-});
+export const APIProducts = () =>
+  createFetch({
+    baseURL: window.NX?.env?.apiURL,
+    headers: {
+      Authorization: `Bearer random`,
+    },
+  });

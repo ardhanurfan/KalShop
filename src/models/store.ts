@@ -1,32 +1,33 @@
+import { combineReducers, createStore } from "@nxweb/core";
 import {
-  combineReducers, createStore
-} from '@nxweb/core';
-import {
-  createCommandHook, createDispatchHook, createStoreHook, createStoreProvider
-} from '@nxweb/react';
+  createCommandHook,
+  createDispatchHook,
+  createStoreHook,
+  createStoreProvider,
+} from "@nxweb/react";
 
-import type { RootAction, RootModel } from './types.js';
-import { productsReducer } from './kalProducts/reducers.js';
-import { productsCommand } from './kalProducts/commands.js';
-import { CartCommand } from './cart/commands.js';
-import { CartReducers, initState } from './cart/reducers.js';
+import type { RootAction, RootModel } from "./types.js";
+import { CartCommand } from "./cart/commands.js";
+import { CartReducers, initState } from "./cart/reducers.js";
+import { ProductsReducer } from "./products/reducers.js";
+import { ProductsCommand } from "./products/commands.js";
 
 // ** Init reducers
 const rootReducer = combineReducers({
-  products: productsReducer,
-  cart: CartReducers
+  products: ProductsReducer,
+  cart: CartReducers,
 });
 
 // ** Init models
 const rootModel: RootModel = {
   products: {},
-  cart: initState
+  cart: initState,
 };
 
 // ** Init commands
 const rootCommand = {
-  products: productsCommand,
-  cart: CartCommand
+  products: ProductsCommand,
+  cart: CartCommand,
 };
 
 // ** Create store

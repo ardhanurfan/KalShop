@@ -70,6 +70,5 @@ ServiceWorker.unregister();
 export default {
   env: {
     apiURL: process.env.API_URL,
-    apiProducts: process.env.PRODUCTS_URL
-  }
+  },
 };

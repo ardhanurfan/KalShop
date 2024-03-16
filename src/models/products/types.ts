@@ -9,7 +9,6 @@ interface Product {
   brand: string;
   category: string;
   thumbnail: string;
-  images: string[];
 }
 
 // Page Model
@@ -17,19 +16,28 @@ interface ProductsModel {
   products?: Product[];
 }
 
+interface ProductModel {
+  product?: Product;
+}
+
 enum ProductsActionType {
-  Load = "products-load",
-  Clear = "products-clear",
+  GET_PRODUCTS = "GET_PRODUCTS",
+  GET_INDIVIDUAL_PRODUCT = "GET_INDIVIDUAL_PRODUCT",
+  CLEAR = "CLEAR",
 }
 
 type ProductsAction =
   | {
-      type: ProductsActionType.Clear;
+      type: ProductsActionType.GET_PRODUCTS;
+      payload?: ProductsModel;
     }
   | {
-      type: ProductsActionType.Load;
-      value?: ProductsModel;
+      type: ProductsActionType.GET_INDIVIDUAL_PRODUCT;
+      payload?: ProductModel;
+    }
+  | {
+      type: ProductsActionType.CLEAR;
     };
 
 export { ProductsActionType };
-export type { ProductsModel, ProductsAction, Product };
+export type { ProductsModel, ProductsAction, Product, ProductModel };
