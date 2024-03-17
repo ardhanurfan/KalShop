@@ -1,6 +1,6 @@
 import toTitleCase from "@lib/toTitleCase";
 import { useCommand, useStore } from "@models/store";
-import { Typography, Box, Grid } from "@mui/material";
+import { Typography, Box, Grid, Card } from "@mui/material";
 
 function CategoryCard({ categories }: { categories: string[] }) {
   const command = useCommand((cmd) => cmd.search);
@@ -25,15 +25,14 @@ function CategoryCard({ categories }: { categories: string[] }) {
       >
         {categories.map((category) => (
           <Grid item key={category} xs={6} md={4} lg={3}>
-            <Box
+            <Card
               onClick={() => dispatch(command.setSearch(category))}
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "#f0f0f0",
                 "&:hover": {
-                  backgroundColor: "#e0e0e0",
+                  backgroundColor: (theme) => theme.palette.grey[500],
                 },
                 "&:active": {
                   backgroundColor: (theme) => theme.palette.primary.main,
@@ -55,7 +54,7 @@ function CategoryCard({ categories }: { categories: string[] }) {
               >
                 {toTitleCase(category)}
               </Typography>
-            </Box>
+            </Card>
           </Grid>
         ))}
       </Grid>
