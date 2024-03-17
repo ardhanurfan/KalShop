@@ -94,7 +94,15 @@ const Products: PageComponent = () => {
             .toString()
             .toLowerCase()
             .includes(search.toLowerCase()) ||
-          product.stock.toString().toLowerCase().includes(search.toLowerCase())
+          product.stock
+            .toString()
+            .toLowerCase()
+            .includes(search.toLowerCase()) ||
+          product.brand.toLowerCase().includes(search.toLowerCase()) ||
+          product.discountPercentage
+            .toString()
+            .toLowerCase()
+            .includes(search.toLowerCase())
       )
       .filter(
         (product) => product.category === catergory || catergory === "ALL"
