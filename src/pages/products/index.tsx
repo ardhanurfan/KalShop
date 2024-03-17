@@ -14,7 +14,7 @@ const Products: PageComponent = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [state, dispatch] = useStore((store) => store.products);
-  const command = useCommand((cmd) => cmd);
+  const command = useCommand((cmd) => cmd.products);
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [id, setId] = useState<number | null>(null);
@@ -34,13 +34,9 @@ const Products: PageComponent = () => {
   };
 
   useEffect(() => {
-    dispatch(command.products.getAllProducts()).catch((err: unknown) => {
+    dispatch(command.getAllProducts()).catch((err: unknown) => {
       console.error(err);
     });
-
-    return () => {
-      dispatch(command.products.clear());
-    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   console.log(state);

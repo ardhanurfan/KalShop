@@ -24,23 +24,26 @@ import {
   Button,
   Checkbox,
   InputAdornment,
+  Modal,
   OutlinedInput,
   Pagination,
   Select,
   TablePagination,
   TableSortLabel,
+  Typography,
 } from "@mui/material";
-import { visuallyHidden } from "@mui/utils";
 import { Product } from "@models/products/types";
+import toTitleCase from "@lib/toTitleCase";
 
 const Products: PageComponent = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const [state, dispatch] = useStore((store) => store.products);
-  const command = useCommand((cmd) => cmd);
+  const command = useCommand((cmd) => cmd.products);
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [id, setId] = useState<number | null>(null);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const [order, setOrder] = useState<"asc" | "desc">("asc");
   const [orderBy, setOrderBy] = useState<keyof Product>("id");
@@ -91,7 +94,15 @@ const Products: PageComponent = () => {
             .toString()
             .toLowerCase()
             .includes(search.toLowerCase()) ||
-          product.stock.toString().toLowerCase().includes(search.toLowerCase())
+          product.stock
+            .toString()
+            .toLowerCase()
+            .includes(search.toLowerCase()) ||
+          product.brand.toLowerCase().includes(search.toLowerCase()) ||
+          product.discountPercentage
+            .toString()
+            .toLowerCase()
+            .includes(search.toLowerCase())
       )
       .filter(
         (product) => product.category === catergory || catergory === "ALL"
@@ -123,15 +134,24 @@ const Products: PageComponent = () => {
     navigate(`/products/${id}`);
   };
 
-  useEffect(() => {
-    dispatch(command.products.getAllProducts()).catch((err: unknown) => {
-      console.error(err);
-    });
+  const handleDelete = () => {
+    if (id) {
+      dispatch(command.deleteProduct(id));
+      handleClose();
+      setOpenDeleteModal(false);
+    }
+  };
 
-    return () => {
-      dispatch(command.products.clear());
-    };
+  useEffect(() => {
+    dispatch(command.getAllProducts());
   }, []);
+
+  const handleEdit = () => {
+    if (id) {
+      dispatch(command.selectCurrentProduct(id));
+    }
+    navigate("/products/add");
+  };
 
   // Table handler
   interface HeadCell {
@@ -153,6 +173,12 @@ const Products: PageComponent = () => {
       numeric: false,
       disablePadding: false,
       label: "Title",
+    },
+    {
+      id: "brand",
+      numeric: false,
+      disablePadding: false,
+      label: "Brand",
     },
     {
       id: "category",
@@ -177,6 +203,12 @@ const Products: PageComponent = () => {
       numeric: true,
       disablePadding: false,
       label: "Price",
+    },
+    {
+      id: "discountPercentage",
+      numeric: true,
+      disablePadding: false,
+      label: "Discount",
     },
     {
       id: "description",
@@ -222,6 +254,52 @@ const Products: PageComponent = () => {
 
   return (
     <>
+      <Modal open={openDeleteModal} onClose={() => setOpenDeleteModal(false)}>
+        <Box
+          sx={{
+            backgroundColor: "white",
+            position: "absolute" as "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            padding: 8,
+            borderRadius: 2,
+          }}
+        >
+          <Typography
+            id="parent-modal-title"
+            variant="h3"
+            component="h3"
+            sx={{ mb: 4 }}
+            fontWeight={700}
+          >
+            Delete Product
+          </Typography>
+          <Typography
+            id="parent-modal-description"
+            sx={{ mb: 8 }}
+            variant="body2"
+            color="text.secondary"
+            component="p"
+            fontWeight={500}
+            fontSize={16}
+          >
+            Are you sure you want to delete this product?
+          </Typography>
+          <Box sx={{ mt: 2, display: "flex", justifyContent: "flex-end" }}>
+            <Button
+              sx={{ mr: 4 }}
+              onClick={() => setOpenDeleteModal(false)}
+              variant="outlined"
+            >
+              Cancel
+            </Button>
+            <Button onClick={handleDelete} variant="contained" color="error">
+              Delete
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
       <TableContainer component={Paper}>
         <Box
           sx={{
@@ -241,7 +319,7 @@ const Products: PageComponent = () => {
             </MenuItem>
             {categories.map((category) => (
               <MenuItem key={category} value={category}>
-                {category}
+                {toTitleCase(category)}
               </MenuItem>
             ))}
           </Select>
@@ -275,6 +353,7 @@ const Products: PageComponent = () => {
             Delete
           </Button>
           <Button
+            onClick={() => navigate("/products/add")}
             variant="contained"
             color="primary"
             startIcon={<Plus height={20} width={20} />}
@@ -358,7 +437,8 @@ const Products: PageComponent = () => {
                   {row.id}
                 </TableCell>
                 <TableCell align="left">{row.title}</TableCell>
-                <TableCell align="left">{row.category}</TableCell>
+                <TableCell align="left">{row.brand}</TableCell>
+                <TableCell align="left">{toTitleCase(row.category)}</TableCell>
                 <TableCell align="left">
                   <img
                     style={{
@@ -372,7 +452,10 @@ const Products: PageComponent = () => {
                   />
                 </TableCell>
                 <TableCell align="right">{row.stock}</TableCell>
-                <TableCell align="right">{row.price}</TableCell>
+                <TableCell align="right">{"$ " + row.price}</TableCell>
+                <TableCell align="right">
+                  {row.discountPercentage + " %"}
+                </TableCell>
                 <TableCell align="left">{row.description}</TableCell>
                 <TableCell align="center">
                   <IconButton onClick={(e) => handleClick(e, row.id)}>
@@ -436,8 +519,8 @@ const Products: PageComponent = () => {
         onClose={handleClose}
       >
         <MenuItem onClick={handleDetail}>Detail</MenuItem>
-        <MenuItem>Edit</MenuItem>
-        <MenuItem>Delete</MenuItem>
+        <MenuItem onClick={handleEdit}>Edit</MenuItem>
+        <MenuItem onClick={() => setOpenDeleteModal(true)}>Delete</MenuItem>
       </Menu>
     </>
   );

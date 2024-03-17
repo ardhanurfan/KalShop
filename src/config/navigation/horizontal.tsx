@@ -16,12 +16,12 @@ export const navigation: readonly HorizontalNavItemsType[] = [
     link: "/cart",
     text: "Cart",
   },
-  {
-    icon: <Pencil />,
-    id: "add",
-    link: "/products/add",
-    text: "Add Form",
-  },
+  // {
+  //   icon: <Pencil />,
+  //   id: "add",
+  //   link: "/products/add",
+  //   text: "Add Form",
+  // },
   {
     icon: <SmartHome />,
     id: "home",

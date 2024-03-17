@@ -6,10 +6,11 @@ import RecommendedProducts from "./_components/recommended-products";
 import { useCommand, useStore } from "@models/store";
 import { useEffect, useMemo } from "react";
 import Categories from "./_components/categories";
+import toTitleCase from "@lib/toTitleCase";
 
 const Home: PageComponent = () => {
   const [productsState, dispatch] = useStore((store) => store.products);
-  const command = useCommand((cmd) => cmd);
+  const command = useCommand((cmd) => cmd.products);
 
   const recommended = useMemo(() => {
     if (!productsState || !productsState.products) {
@@ -33,15 +34,11 @@ const Home: PageComponent = () => {
       }
     });
 
-    return categories;
+    return categories.map((category) => toTitleCase(category));
   }, [productsState]);
 
   useEffect(() => {
-    dispatch(command.products.getAllProducts());
-
-    return () => {
-      dispatch(command.products.clear());
-    };
+    dispatch(command.getAllProducts());
   }, []);
 
   return (

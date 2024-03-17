@@ -11,7 +11,7 @@ import { Star } from "@nxweb/icons/tabler";
 const Product: PageComponent = () => {
   const { id } = useParams();
   const [state, dispatch] = useStore((store) => store.products);
-  const command = useCommand((cmd) => cmd);
+  const command = useCommand((cmd) => cmd.products);
 
   const product = useMemo(
     () => state?.products?.find((o) => o.id.toString() === id),
@@ -19,14 +19,7 @@ const Product: PageComponent = () => {
   );
 
   useEffect(() => {
-    dispatch(command.products.getAllProducts()).catch((err: unknown) => {
-      console.error(err);
-    });
-
-    return () => {
-      dispatch(command.products.clear());
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatch(command.getAllProducts());
   }, []);
 
   return (

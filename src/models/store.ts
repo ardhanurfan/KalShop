@@ -20,8 +20,8 @@ const rootReducer = combineReducers({
 
 // ** Init models
 const rootModel: RootModel = {
-  products: {},
-  cart: { id: 0, products: []}
+  products: { products: [] },
+  cart: { id: 0, products: [] },
 };
 
 // ** Init commands
