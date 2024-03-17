@@ -11,27 +11,31 @@ import { ProductsReducer } from "./products/reducers.js";
 import { ProductsCommand } from "./products/commands.js";
 import { CartReducers } from "./cart/reducers.js";
 import { CartCommand } from "./cart/commands.js";
-import { SearchReducer } from "./search/reducer.js";
+import { SearchReducer } from "./search/reducers.js";
 import { SearchCommand } from "./search/commands.js";
+import { HistoryCommand } from "./history/commands.js";
+import { HistoryReducers } from "./history/reducers.js";
 
 // ** Init reducers
 const rootReducer = combineReducers({
   products: ProductsReducer,
   cart: CartReducers,
   search: SearchReducer,
+  histories: HistoryReducers,
 });
 
 // ** Init models
 const rootModel: RootModel = {
   products: { products: [] },
   cart: { id: 0, products: [] },
-  search: "",
+  histories: { histories: [] },
 };
 
 // ** Init commands
 const rootCommand = {
   products: ProductsCommand,
   cart: CartCommand,
+  histories: HistoryCommand,
   search: SearchCommand,
 };
 

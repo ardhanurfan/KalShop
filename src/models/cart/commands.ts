@@ -19,7 +19,7 @@ const CartCommand = {
           };
 
           dispatch({
-            type: CartActionType.LOAD,
+            type: CartActionType.LOAD_CART,
             payload,
           });
         }
@@ -30,24 +30,24 @@ const CartCommand = {
   },
   clear: (): CartAction => {
     return {
-      type: CartActionType.CLEAR,
+      type: CartActionType.CLEAR_CART,
     };
   },
   addItem: (item: CartItem) => {
     return {
-      type: CartActionType.ADD_ITEM,
+      type: CartActionType.ADD_ITEM_CART,
       payload: item,
     };
   },
   editQty: (item: CartItem) => {
     return {
-      type: CartActionType.EDIT_QTY,
+      type: CartActionType.EDIT_QTY_CART,
       payload: item,
     };
   },
   removeItem: (item: CartItem) => {
     return {
-      type: CartActionType.REMOVE_ITEM,
+      type: CartActionType.REMOVE_ITEM_CART,
       payload: item,
     };
   },
