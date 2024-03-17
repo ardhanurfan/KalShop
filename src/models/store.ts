@@ -11,23 +11,28 @@ import { ProductsReducer } from "./products/reducers.js";
 import { ProductsCommand } from "./products/commands.js";
 import { CartReducers } from "./cart/reducers.js";
 import { CartCommand } from "./cart/commands.js";
+import { SearchReducer } from "./search/reducer.js";
+import { SearchCommand } from "./search/commands.js";
 
 // ** Init reducers
 const rootReducer = combineReducers({
   products: ProductsReducer,
   cart: CartReducers,
+  search: SearchReducer,
 });
 
 // ** Init models
 const rootModel: RootModel = {
   products: { products: [] },
   cart: { id: 0, products: [] },
+  search: "",
 };
 
 // ** Init commands
 const rootCommand = {
   products: ProductsCommand,
   cart: CartCommand,
+  search: SearchCommand,
 };
 
 // ** Create store

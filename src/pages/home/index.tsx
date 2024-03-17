@@ -1,19 +1,19 @@
 import type { PageComponent } from "@nxweb/react";
 
 import { Box } from "@components/material.js";
-import CarouselBanner from "./_components/carousel-banner";
-import RecommendedProducts from "./_components/recommended-products";
+import CarouselBanner from "../../components/home/CarouselBanner";
+import RecommendedProducts from "../../components/home/RecommendedProducts";
 import { useCommand, useStore } from "@models/store";
 import { useEffect, useMemo } from "react";
-import Categories from "./_components/categories";
+import CategoryCard from "../../components/home/CategoryCard";
 import toTitleCase from "@lib/toTitleCase";
 
 const Home: PageComponent = () => {
   const [productsState, dispatch] = useStore((store) => store.products);
   const command = useCommand((cmd) => cmd.products);
 
-  const [cartState, cartDispatch] = useStore((store) => store.cart)
-  const cartCommand = useCommand((cmd) => cmd.cart)
+  const [cartState, cartDispatch] = useStore((store) => store.cart);
+  const cartCommand = useCommand((cmd) => cmd.cart);
 
   const recommended = useMemo(() => {
     if (!productsState || !productsState.products) {
@@ -26,12 +26,12 @@ const Home: PageComponent = () => {
   }, [productsState]);
 
   useEffect(() => {
-    cartDispatch(cartCommand.getCart())
+    cartDispatch(cartCommand.getCart());
 
-    console.log('Cart condition')
-    console.log(cartState?.products)
-  }, [])
-  
+    console.log("Cart condition");
+    console.log(cartState?.products);
+  }, []);
+
   const categories = useMemo(() => {
     if (!productsState || !productsState.products) {
       return [];
@@ -44,7 +44,7 @@ const Home: PageComponent = () => {
       }
     });
 
-    return categories.map((category) => toTitleCase(category));
+    return categories.map((category) => category);
   }, [productsState]);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const Home: PageComponent = () => {
   return (
     <Box>
       <CarouselBanner />
-      <Categories categories={categories} />
+      <CategoryCard categories={categories} />
       <RecommendedProducts products={recommended} />
     </Box>
   );

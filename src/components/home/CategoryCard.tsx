@@ -1,6 +1,11 @@
+import toTitleCase from "@lib/toTitleCase";
+import { useCommand, useStore } from "@models/store";
 import { Typography, Box, Grid } from "@mui/material";
 
-function Categories({ categories }: { categories: string[] }) {
+function CategoryCard({ categories }: { categories: string[] }) {
+  const command = useCommand((cmd) => cmd.search);
+  const [__, dispatch] = useStore((store) => store.search);
+
   return (
     <Box sx={{ marginTop: 12 }}>
       <Typography
@@ -21,6 +26,7 @@ function Categories({ categories }: { categories: string[] }) {
         {categories.map((category) => (
           <Grid item key={category} xs={6} md={4} lg={3}>
             <Box
+              onClick={() => dispatch(command.setSearch(category))}
               sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -39,7 +45,6 @@ function Categories({ categories }: { categories: string[] }) {
                 boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                 height: 80,
                 cursor: "pointer",
-                // padding: "4px 12px",
               }}
             >
               <Typography
@@ -48,7 +53,7 @@ function Categories({ categories }: { categories: string[] }) {
                 fontSize={16}
                 fontWeight={500}
               >
-                {category}
+                {toTitleCase(category)}
               </Typography>
             </Box>
           </Grid>
@@ -58,4 +63,4 @@ function Categories({ categories }: { categories: string[] }) {
   );
 }
 
-export default Categories;
+export default CategoryCard;

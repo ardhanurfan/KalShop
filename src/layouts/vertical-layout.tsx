@@ -14,6 +14,8 @@ import type { LayoutProps } from "@layouts/types.js";
 
 import { VerticalAppBar } from "./components/vertical/app-bar.js";
 import { Navigation } from "./components/vertical/navigation.js";
+import { useStore } from "@models/store.js";
+import SearchPage from "@pages/_search-page/index.js";
 
 const VerticalLayoutWrapper = styled("div")({
   display: "flex",
@@ -66,6 +68,8 @@ const VerticalLayout: FC<VerticalLayoutProps> = (props) => {
 
   // ** Toggle Functions
   const toggleNavVisibility = () => setNavVisible(!navVisible);
+
+  const [search] = useStore((store) => store.search);
 
   return (
     <>
@@ -120,7 +124,7 @@ const VerticalLayout: FC<VerticalLayoutProps> = (props) => {
               }),
             }}
           >
-            {children}
+            {search == "" ? children : <SearchPage />}
           </ContentWrapper>
 
           {/* Footer Component */}

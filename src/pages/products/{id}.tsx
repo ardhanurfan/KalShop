@@ -12,39 +12,47 @@ import toast, { Toaster } from "react-hot-toast";
 
 const Product: PageComponent = () => {
   const { id } = useParams();
-  const [state, dispatch] = useStore((store) => store.products);
-  const command = useCommand((cmd) => cmd.products);
-  const [cartState, cartDispatch] = useStore((store) => store.cart)
-  const cartCommand = useCommand((cmd) => cmd.cart)
-  const [qty, setQty] = useState<number>(0)
-
-  const product = useMemo(
-    () => state?.products?.find((o) => o.id.toString() === id),
-    [state, id]
+  const [product, dispatch] = useStore(
+    (store) => store.products?.selectedProduct
   );
+  const command = useCommand((cmd) => cmd.products);
+  const [__, cartDispatch] = useStore((store) => store.cart);
+  const cartCommand = useCommand((cmd) => cmd.cart);
+  const [qty, setQty] = useState<number>(0);
 
   const handleQtyChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setQty(+e.target.value)
-  }
+    setQty(+e.target.value);
+  };
 
   const handleAddCart = () => {
+    if (qty <= 0) {
+      toast.error("Quantity must be greater than 0");
+      return;
+    }
+
     const item: CartItem = {
       id: product?.id ?? 0,
-      title: product?.title ?? '',
+      title: product?.title ?? "",
       price: product?.price ?? 0,
       quantity: qty,
       total: 0,
       discountPercentage: product?.discountPercentage ?? 0,
-      discountedPrice: (product?.price ?? 0) * (product?.discountPercentage ?? 0) / 100,
-      thumbnail: product?.thumbnail ?? ''
-    }
+      discountedPrice:
+        ((product?.price ?? 0) * (product?.discountPercentage ?? 0)) / 100,
+      thumbnail: product?.thumbnail ?? "",
+    };
 
-    cartDispatch(cartCommand.addItem(item))
-    toast.success("Item has been added")
-  }
+    cartDispatch(cartCommand.addItem(item));
+    toast.success("Item has been added");
+  };
 
   useEffect(() => {
-    dispatch(command.getAllProducts());
+    if (id) {
+      dispatch(command.selectCurrentProduct(Number.parseInt(id)));
+    }
+    return () => {
+      dispatch(command.clear());
+    };
   }, []);
 
   return (
@@ -85,7 +93,6 @@ const Product: PageComponent = () => {
           </Typography>
 
           <Box display="flex" flexDirection="row" marginTop="54px">
-            {" "}
             <TextField
               id="filled-number"
               label="Quantity"
