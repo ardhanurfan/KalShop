@@ -23,9 +23,17 @@ const ProductsReducer = (
         };
       }
       return state;
-    case ProductsActionType.GET_INDIVIDUAL_PRODUCT:
-      return { ...state, selectedProduct: action.payload };
-    case ProductsActionType.CLEAR:
+    case ProductsActionType.SELECT_CURRENT_PRODUCT:
+      if (action.payload && state.products) {
+        return {
+          ...state,
+          selectedProduct: state.products.find(
+            (product) => product.id === action.payload
+          ),
+        };
+      }
+      return state;
+    case ProductsActionType.CLEAR_SELECTED_PRODUCT:
       return { products: state.products };
     case ProductsActionType.ADD_PRODUCT:
       if (action.payload && state.products) {
@@ -35,6 +43,28 @@ const ProductsReducer = (
           rating: 0,
         };
         return { ...state, products: [...state.products, newProduct] };
+      }
+      return state;
+    case ProductsActionType.DELETE_PRODUCT:
+      if (action.payload && state.products) {
+        return {
+          ...state,
+          products: [...state.products.filter((p) => p.id !== action.payload)],
+        };
+      }
+      return state;
+    case ProductsActionType.EDIT_PRODUCT:
+      if (action.payload && state.products) {
+        const index = state.products.findIndex(
+          (p) => p.id === action.payload?.id
+        );
+        if (index !== -1) {
+          state.products[index] = action.payload;
+        }
+        return {
+          ...state,
+          products: [...state.products],
+        };
       }
       return state;
     default:

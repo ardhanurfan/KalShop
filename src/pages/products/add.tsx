@@ -28,7 +28,7 @@ import { useNavigate } from "react-router-dom";
 //   size: number;
 // }
 
-const defaultValues = {
+let defaultValues = {
   title: "",
   description: "",
   brand: "",
@@ -54,29 +54,49 @@ const AddForm = () => {
     return categories;
   }, [productsState]);
 
-  useEffect(() => {
-    dispatch(command.getAllProducts());
-  }, []);
-
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<Product>({ defaultValues });
+  } = useForm<Product>({
+    defaultValues: productsState?.selectedProduct ?? defaultValues,
+  });
+
+  useEffect(() => {
+    dispatch(command.getAllProducts());
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      dispatch(command.clear());
+    };
+  }, []);
 
   const onSubmit: SubmitHandler<Product> = async (data) => {
     try {
-      if (!files.length) {
-        toast.error("Please upload a thumbnail.");
-        return;
+      if (productsState?.selectedProduct) {
+        dispatch(
+          command.editProduct({
+            ...data,
+            thumbnail: files[0]
+              ? URL.createObjectURL(files[0] as any)
+              : data.thumbnail,
+          })
+        );
+        toast.success("Product edited successfully!");
+      } else {
+        if (!files.length) {
+          toast.error("Please upload a thumbnail.");
+          return;
+        }
+        dispatch(
+          command.addProduct({
+            ...data,
+            thumbnail: URL.createObjectURL(files[0] as any),
+          })
+        );
+        toast.success("Product added successfully!");
       }
-      dispatch(
-        command.addProduct({
-          ...data,
-          thumbnail: URL.createObjectURL(files[0] as any),
-        })
-      );
-      toast.success("Form submitted successfully!");
       navigate("/manage-products");
     } catch (error) {
       toast.error("An error occurred while submitting the form.");
@@ -305,6 +325,23 @@ const AddForm = () => {
                     }}
                   >
                     {img}
+                  </Box>
+                ) : productsState?.selectedProduct ? (
+                  <Box
+                    sx={{
+                      border: "1px solid #dedde0",
+                      padding: "20px",
+                      borderRadius: "10px",
+                      textAlign: "center",
+                    }}
+                  >
+                    <img
+                      style={{ maxHeight: 430 }}
+                      key={productsState.selectedProduct.title}
+                      alt={productsState.selectedProduct.title}
+                      className="single-file-image"
+                      src={productsState.selectedProduct.thumbnail}
+                    />
                   </Box>
                 ) : (
                   <Box

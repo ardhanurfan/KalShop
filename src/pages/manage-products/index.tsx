@@ -24,13 +24,14 @@ import {
   Button,
   Checkbox,
   InputAdornment,
+  Modal,
   OutlinedInput,
   Pagination,
   Select,
   TablePagination,
   TableSortLabel,
+  Typography,
 } from "@mui/material";
-import { visuallyHidden } from "@mui/utils";
 import { Product } from "@models/products/types";
 import toTitleCase from "@lib/toTitleCase";
 
@@ -42,6 +43,7 @@ const Products: PageComponent = () => {
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [id, setId] = useState<number | null>(null);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const [order, setOrder] = useState<"asc" | "desc">("asc");
   const [orderBy, setOrderBy] = useState<keyof Product>("id");
@@ -124,9 +126,24 @@ const Products: PageComponent = () => {
     navigate(`/products/${id}`);
   };
 
+  const handleDelete = () => {
+    if (id) {
+      dispatch(command.deleteProduct(id));
+      handleClose();
+      setOpenDeleteModal(false);
+    }
+  };
+
   useEffect(() => {
     dispatch(command.getAllProducts());
   }, []);
+
+  const handleEdit = () => {
+    if (id) {
+      dispatch(command.selectCurrentProduct(id));
+    }
+    navigate("/products/add");
+  };
 
   // Table handler
   interface HeadCell {
@@ -217,6 +234,52 @@ const Products: PageComponent = () => {
 
   return (
     <>
+      <Modal open={openDeleteModal} onClose={() => setOpenDeleteModal(false)}>
+        <Box
+          sx={{
+            backgroundColor: "white",
+            position: "absolute" as "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            padding: 8,
+            borderRadius: 2,
+          }}
+        >
+          <Typography
+            id="parent-modal-title"
+            variant="h3"
+            component="h3"
+            sx={{ mb: 4 }}
+            fontWeight={700}
+          >
+            Delete Product
+          </Typography>
+          <Typography
+            id="parent-modal-description"
+            sx={{ mb: 8 }}
+            variant="body2"
+            color="text.secondary"
+            component="p"
+            fontWeight={500}
+            fontSize={16}
+          >
+            Are you sure you want to delete this product?
+          </Typography>
+          <Box sx={{ mt: 2, display: "flex", justifyContent: "flex-end" }}>
+            <Button
+              sx={{ mr: 4 }}
+              onClick={() => setOpenDeleteModal(false)}
+              variant="outlined"
+            >
+              Cancel
+            </Button>
+            <Button onClick={handleDelete} variant="contained" color="error">
+              Delete
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
       <TableContainer component={Paper}>
         <Box
           sx={{
@@ -432,8 +495,8 @@ const Products: PageComponent = () => {
         onClose={handleClose}
       >
         <MenuItem onClick={handleDetail}>Detail</MenuItem>
-        <MenuItem>Edit</MenuItem>
-        <MenuItem>Delete</MenuItem>
+        <MenuItem onClick={handleEdit}>Edit</MenuItem>
+        <MenuItem onClick={() => setOpenDeleteModal(true)}>Delete</MenuItem>
       </Menu>
     </>
   );

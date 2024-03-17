@@ -29,3 +29,30 @@ export const postProduct = async (
     throw error;
   }
 };
+
+export const deleteProduct = async (
+  id: number,
+  options?: Readonly<FetchURLOptions>
+) => {
+  try {
+    const url = apiUrlProducts(`${endpointProducts}/${id}`, options);
+    const res = await APIProducts().delete(url.toString());
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const putProduct = async (data: Product) => {
+  try {
+    const url = apiUrlProducts(`${endpointProducts}/${data.id}`);
+    const res = await APIProducts().put(url.toString(), data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};

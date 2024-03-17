@@ -19,24 +19,22 @@ const root = createRoot(document.getElementById("root") as HTMLElement);
 const error = lazy(() => import("@views/errors/route.js"));
 
 root.render(
-  <StrictMode>
-    <StoreProvider>
-      <BrowserRouter
-        error={error}
-        fallback={<PageSpinner />}
-        layouts={layouts}
-        resolvePages={true}
-        routes={routes}
-        wrapper={App}
-      />
+  <StoreProvider>
+    <BrowserRouter
+      error={error}
+      fallback={<PageSpinner />}
+      layouts={layouts}
+      resolvePages={true}
+      routes={routes}
+      wrapper={App}
+    />
 
-      <Toast.Container
-        closeOnClick={true}
-        draggable={false}
-        pauseOnFocusLoss={false}
-      />
-    </StoreProvider>
-  </StrictMode>
+    <Toast.Container
+      closeOnClick={true}
+      draggable={false}
+      pauseOnFocusLoss={false}
+    />
+  </StoreProvider>
 );
 
 /**
@@ -70,6 +68,6 @@ ServiceWorker.unregister();
 export default {
   env: {
     apiURL: process.env.API_URL,
-    productsURL: process.env.PRODUCTS_URL
+    productsURL: process.env.PRODUCTS_URL,
   },
 };
