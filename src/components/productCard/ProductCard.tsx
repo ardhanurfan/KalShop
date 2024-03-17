@@ -1,67 +1,70 @@
-import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
-import { useStore } from "@models/store";
-import { Link } from "react-router-dom";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Box,
+  Grid,
+} from "@mui/material";
 import { Star } from "@nxweb/icons/tabler";
+import { Product } from "@models/products/types";
+import toTitleCase from "@lib/toTitleCase";
+import { Link } from "react-router-dom";
 
-const ProductCard = () => {
-  const [state, dispatch] = useStore((store) => store.products);
-  const render = state?.products?.map((item) => {
-    return (
-      <div>
-        <Card
-          sx={{
-            marginTop: "32px",
-            width: "300px",
-            display: "flex",
-            flexDirection: "column",
-            marginLeft: "16px",
-            marginRight: "16px",
-            textDecoration: "none",
-          }}
-        >
-          <Link to={`/products/${item.id}`}>
-            <CardMedia component="img" height="270" image={item.thumbnail} />
-            <CardContent>
+const ProductCard = ({ item }: { item: Product }) => {
+  return (
+    <Grid item xs={6} md={4} lg={2}>
+      <Link to={`/products/${item.id}`} style={{ textDecoration: "none" }}>
+        <Card elevation={1} sx={{ height: "100%" }}>
+          <CardMedia component="img" height="200" image={item.thumbnail} />
+          <CardContent
+            sx={{ display: "flex", flexDirection: "column", gap: 1, p: 3 }}
+          >
+            <Typography
+              variant="h5"
+              component={"h5"}
+              fontWeight={500}
+              fontSize={16}
+            >
+              {item.title}
+            </Typography>
+            <Typography
+              variant="h5"
+              component={"h5"}
+              fontSize={12}
+              color={(theme) => theme.palette.grey[500]}
+            >
+              {toTitleCase(item.category)}
+            </Typography>
+            <Typography
+              variant="h4"
+              component={"h4"}
+              color={(theme) => theme.palette.primary.main}
+            >
+              {"$" + item.price}
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "end",
+                alignItems: "center",
+              }}
+            >
+              <Star color="#FFD700" fill="#FFD700" />
               <Typography
-                style={{ textDecoration: "none" }}
                 variant="h5"
-                component="h3"
+                component={"h5"}
+                fontSize={12}
+                sx={{ ml: 1 }}
               >
-                {item.title}
+                {item.rating}
               </Typography>
-              <Typography variant="h5" component="h3" fontSize={12}>
-                {item.brand}
-              </Typography>
-              <Typography variant="h4" component="h4" color="green">
-                ${item.price}
-              </Typography>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "start",
-                    alignItems: "center",
-                  }}
-                >
-                  <Star color="#FFD700" fill="#FFD700" />
-                  <p>{item.rating}</p>
-                </Box>
-              </Box>
-            </CardContent>
-          </Link>
+            </Box>
+          </CardContent>
         </Card>
-      </div>
-    );
-  });
-
-  return render;
+      </Link>
+    </Grid>
+  );
 };
 
 export default ProductCard;

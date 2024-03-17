@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import type { PageComponent } from "@nxweb/react";
@@ -10,16 +10,18 @@ import { Star } from "@nxweb/icons/tabler";
 
 const Product: PageComponent = () => {
   const { id } = useParams();
-  const [state, dispatch] = useStore((store) => store.products);
+  const [product, dispatch] = useStore(
+    (store) => store.products?.selectedProduct
+  );
   const command = useCommand((cmd) => cmd.products);
 
-  const product = useMemo(
-    () => state?.products?.find((o) => o.id.toString() === id),
-    [state, id]
-  );
-
   useEffect(() => {
-    dispatch(command.getAllProducts());
+    if (id) {
+      dispatch(command.selectCurrentProduct(Number.parseInt(id)));
+    }
+    return () => {
+      dispatch(command.clear());
+    };
   }, []);
 
   return (
@@ -60,7 +62,6 @@ const Product: PageComponent = () => {
           </Typography>
 
           <Box display="flex" flexDirection="row" marginTop="54px">
-            {" "}
             <TextField
               id="filled-number"
               label="Quantity"

@@ -1,11 +1,11 @@
 import type { PageComponent } from "@nxweb/react";
 
 import { Box, Typography } from "@components/material.js";
-import CarouselBanner from "./_components/carousel-banner";
-import RecommendedProducts from "./_components/recommended-products";
+import CarouselBanner from "../../components/home/CarouselBanner";
+import RecommendedProducts from "../../components/home/RecommendedProducts";
 import { useCommand, useStore } from "@models/store";
 import { useEffect, useMemo } from "react";
-import Categories from "./_components/categories";
+import CategoryCard from "../../components/home/CategoryCard";
 import toTitleCase from "@lib/toTitleCase";
 
 const Home: PageComponent = () => {
@@ -44,7 +44,7 @@ const Home: PageComponent = () => {
   return (
     <Box>
       <CarouselBanner />
-      <Categories categories={categories} />
+      <CategoryCard categories={categories} />
       <RecommendedProducts products={recommended} />
     </Box>
   );

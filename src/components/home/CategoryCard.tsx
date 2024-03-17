@@ -1,6 +1,6 @@
 import { Typography, Box, Grid } from "@mui/material";
 
-function Categories({ categories }: { categories: string[] }) {
+function CategoryCard({ categories }: { categories: string[] }) {
   return (
     <Box sx={{ marginTop: 12 }}>
       <Typography
@@ -58,4 +58,4 @@ function Categories({ categories }: { categories: string[] }) {
   );
 }
 
-export default Categories;
+export default CategoryCard;
