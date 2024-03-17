@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import type { PageComponent } from "@nxweb/react";
 
@@ -11,6 +11,7 @@ import { CartItem } from "@models/cart/types";
 import toast, { Toaster } from "react-hot-toast";
 
 const Product: PageComponent = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [product, dispatch] = useStore(
     (store) => store.products?.selectedProduct
@@ -30,6 +31,11 @@ const Product: PageComponent = () => {
       return;
     }
 
+    if (product?.stock! < qty) {
+      toast.error("Stock not enough");
+      return;
+    }
+
     const item: CartItem = {
       id: product?.id ?? 0,
       title: product?.title ?? "",
@@ -44,6 +50,7 @@ const Product: PageComponent = () => {
 
     cartDispatch(cartCommand.addItem(item));
     toast.success("Item has been added");
+    navigate("/cart");
   };
 
   useEffect(() => {
@@ -81,6 +88,7 @@ const Product: PageComponent = () => {
             <Star color="#FFD700" fill="#FFD700" />
             <Typography>{product?.rating}</Typography>
           </Box>
+          <Typography marginTop="16px">{"Sisa " + product?.stock}</Typography>
           <Typography
             variant="h4"
             color={(theme) => theme.palette.primary.main}

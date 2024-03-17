@@ -12,25 +12,15 @@ const Home: PageComponent = () => {
   const [productsState, dispatch] = useStore((store) => store.products);
   const command = useCommand((cmd) => cmd.products);
 
-  const [cartState, cartDispatch] = useStore((store) => store.cart);
-  const cartCommand = useCommand((cmd) => cmd.cart);
-
   const recommended = useMemo(() => {
     if (!productsState || !productsState.products) {
       return [];
     }
 
-    return productsState.products
+    return [...productsState.products]
       .sort((a, b) => b.rating - a.rating)
       .slice(0, 12);
   }, [productsState]);
-
-  useEffect(() => {
-    cartDispatch(cartCommand.getCart());
-
-    console.log("Cart condition");
-    console.log(cartState?.products);
-  }, []);
 
   const categories = useMemo(() => {
     if (!productsState || !productsState.products) {

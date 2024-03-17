@@ -8,7 +8,7 @@ const ProductsReducer = (
 ): ProductsModel => {
   switch (action.type) {
     case ProductsActionType.GET_PRODUCTS:
-      if (action.payload && state.products) {
+      if (action.payload && state.products && state.products.length <= 0) {
         const newProducts = action.payload.filter(
           (newProduct) =>
             !state.products!.some(

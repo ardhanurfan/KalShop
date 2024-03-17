@@ -135,6 +135,14 @@ const Products: PageComponent = () => {
   };
 
   const handleDelete = () => {
+    if (selected.length > 0) {
+      selected.forEach((id) => {
+        dispatch(command.deleteProduct(id));
+      });
+      setSelected([]);
+      setOpenDeleteModal(false);
+      return;
+    }
     if (id) {
       dispatch(command.deleteProduct(id));
       handleClose();
@@ -349,6 +357,7 @@ const Products: PageComponent = () => {
             variant="contained"
             color="error"
             startIcon={<Trash height={20} width={20} />}
+            onClick={() => setOpenDeleteModal(true)}
           >
             Delete
           </Button>
