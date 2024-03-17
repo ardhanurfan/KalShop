@@ -16,25 +16,38 @@ import EmptyCart from "@components/cart/EmptyCart";
 import CartItem from "@components/cart/CartItem";
 import OrderPlaced from "@components/cart/OrderPlaced";
 import { useCommand, useStore } from "@models/store";
+import { HistoryItem } from "@models/history/types";
 
 const Cart = () => {
   const [placed, setPlaced] = useState<Boolean>(false);
   const [bill, setBill] = useState<{
-    qty: number,
-    orderTotal: number,
-    total: number
+    qty: number;
+    orderTotal: number;
+    total: number;
   }>({
     qty: 0,
     orderTotal: 0,
-    total: 0
-  })
+    total: 0,
+  });
 
   const [state, dispatch] = useStore((store) => store.cart);
+  const [__, dispatchHistories] = useStore((store) => store.histories);
   const command = useCommand((cmd) => cmd.cart);
+  const commandHistories = useCommand((cmd) => cmd.histories);
 
   const orderPlaced = () => {
-    dispatch(command.clear);
-    setPlaced(true);
+    if (state) {
+      const newOrder: HistoryItem = {
+        ...state,
+        date: new Date(),
+        orderTotal: bill.orderTotal,
+        deliveryCharge: 5,
+      };
+
+      dispatchHistories(commandHistories.addItem(newOrder));
+      dispatch(command.clear());
+      setPlaced(true);
+    }
   };
 
   useEffect(() => {
@@ -43,15 +56,17 @@ const Cart = () => {
 
     state?.products.forEach((item) => {
       qtyTotal += item.quantity;
-      orderTotal += item.quantity * (item.price - (item.price * item.discountPercentage / 100));
+      orderTotal +=
+        item.quantity *
+        (item.price - (item.price * item.discountPercentage) / 100);
     });
 
     setBill({
       qty: qtyTotal,
       orderTotal: +orderTotal.toFixed(2),
-      total: +(orderTotal + 5).toFixed(2)
-    })
-  }, [state])
+      total: +(orderTotal + 5).toFixed(2),
+    });
+  }, [state]);
 
   return (
     <Card>
@@ -147,9 +162,7 @@ const Cart = () => {
                           justifyContent: "flex-end",
                         }}
                       >
-                        <Typography
-                          sx={{ color: "text.secondary" }}
-                        >
+                        <Typography sx={{ color: "text.secondary" }}>
                           $5
                         </Typography>
                       </Box>
