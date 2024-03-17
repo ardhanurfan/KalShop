@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 import EmptyCart from "@components/cart/EmptyCart";
 import CartItem from "@components/cart/CartItem";
@@ -36,14 +36,6 @@ const Cart = () => {
     dispatch(command.clear);
     setPlaced(true);
   };
-
-  useEffect(() => {
-    dispatch(command.getCart());
-
-    return () => {
-      dispatch(command.clear())
-    }
-  }, [])
 
   useEffect(() => {
     let qtyTotal = 0;

@@ -21,13 +21,14 @@ const CartReducers = (
         discountPercentage,
         discountedPrice,
         thumbnail,
+        quantity
       } = action.payload;
       const filtered = state.products.filter((item) => item.id !== id);
 
       const exist = state.products.find((item) => item.id === id);
 
-      const quantity: number = exist ? exist.quantity + 1 : 1;
-      const total = quantity * discountedPrice;
+      const qty = exist ? exist.quantity + quantity : quantity;
+      const total = qty * discountedPrice;
 
       return {
         ...state,
@@ -40,7 +41,7 @@ const CartReducers = (
             discountPercentage,
             discountedPrice,
             thumbnail,
-            quantity,
+            quantity: qty,
             total,
           },
         ],
