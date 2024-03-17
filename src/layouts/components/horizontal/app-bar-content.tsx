@@ -6,6 +6,7 @@ import { UserDropdown } from "@components/user-dropdown.js";
 import type { Settings } from "@hooks/use-settings.js";
 import { Search } from "@nxweb/icons/tabler";
 import { InputBase } from "@mui/material";
+import { useCommand, useStore } from "@models/store";
 
 interface Props {
   readonly saveSettings: (values: Settings) => void;
@@ -13,6 +14,9 @@ interface Props {
 }
 
 const AppBarContent: FC<Props> = ({ settings, saveSettings }) => {
+  const [search, dispatch] = useStore((store) => store.search);
+  const command = useCommand((cmd) => cmd.search);
+
   return (
     <Box sx={{ alignItems: "center", display: "flex" }}>
       <Box
@@ -29,7 +33,11 @@ const AppBarContent: FC<Props> = ({ settings, saveSettings }) => {
         }}
       >
         <Search height={20} width={20} />
-        <InputBase placeholder="Search..."></InputBase>
+        <InputBase
+          value={search}
+          onChange={(e) => dispatch(command.setSearch(e.target.value))}
+          placeholder="Search..."
+        ></InputBase>
       </Box>
       <ModeToggler saveSettings={saveSettings} settings={settings} />
       <UserDropdown settings={settings} />

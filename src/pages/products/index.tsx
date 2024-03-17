@@ -49,7 +49,7 @@ const Products: PageComponent = () => {
           Barang barang terbaik, pasti ori, pasti kalcer
         </Typography>
       </Box>
-      <Grid container sx={{ justifyContent: "center" }} spacing={4}>
+      <Grid container spacing={4}>
         {state?.products?.map((product) => (
           <ProductCard key={product.id} item={product} />
         ))}

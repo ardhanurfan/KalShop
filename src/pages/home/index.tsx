@@ -1,6 +1,6 @@
 import type { PageComponent } from "@nxweb/react";
 
-import { Box, Typography } from "@components/material.js";
+import { Box } from "@components/material.js";
 import CarouselBanner from "../../components/home/CarouselBanner";
 import RecommendedProducts from "../../components/home/RecommendedProducts";
 import { useCommand, useStore } from "@models/store";
@@ -34,7 +34,7 @@ const Home: PageComponent = () => {
       }
     });
 
-    return categories.map((category) => toTitleCase(category));
+    return categories.map((category) => category);
   }, [productsState]);
 
   useEffect(() => {
