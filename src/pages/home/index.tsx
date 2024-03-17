@@ -1,6 +1,6 @@
 import type { PageComponent } from "@nxweb/react";
 
-import { Box, Typography } from "@components/material.js";
+import { Box } from "@components/material.js";
 import CarouselBanner from "./_components/carousel-banner";
 import RecommendedProducts from "./_components/recommended-products";
 import { useCommand, useStore } from "@models/store";
@@ -12,6 +12,9 @@ const Home: PageComponent = () => {
   const [productsState, dispatch] = useStore((store) => store.products);
   const command = useCommand((cmd) => cmd.products);
 
+  const [cartState, cartDispatch] = useStore((store) => store.cart)
+  const cartCommand = useCommand((cmd) => cmd.cart)
+
   const recommended = useMemo(() => {
     if (!productsState || !productsState.products) {
       return [];
@@ -22,6 +25,13 @@ const Home: PageComponent = () => {
       .slice(0, 12);
   }, [productsState]);
 
+  useEffect(() => {
+    cartDispatch(cartCommand.getCart())
+
+    console.log('Cart condition')
+    console.log(cartState?.products)
+  }, [])
+  
   const categories = useMemo(() => {
     if (!productsState || !productsState.products) {
       return [];
