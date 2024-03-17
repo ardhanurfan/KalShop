@@ -167,6 +167,12 @@ const Products: PageComponent = () => {
       label: "Title",
     },
     {
+      id: "brand",
+      numeric: false,
+      disablePadding: false,
+      label: "Brand",
+    },
+    {
       id: "category",
       numeric: false,
       disablePadding: false,
@@ -189,6 +195,12 @@ const Products: PageComponent = () => {
       numeric: true,
       disablePadding: false,
       label: "Price",
+    },
+    {
+      id: "discountPercentage",
+      numeric: true,
+      disablePadding: false,
+      label: "Discount",
     },
     {
       id: "description",
@@ -417,6 +429,7 @@ const Products: PageComponent = () => {
                   {row.id}
                 </TableCell>
                 <TableCell align="left">{row.title}</TableCell>
+                <TableCell align="left">{row.brand}</TableCell>
                 <TableCell align="left">{toTitleCase(row.category)}</TableCell>
                 <TableCell align="left">
                   <img
@@ -431,7 +444,10 @@ const Products: PageComponent = () => {
                   />
                 </TableCell>
                 <TableCell align="right">{row.stock}</TableCell>
-                <TableCell align="right">{row.price}</TableCell>
+                <TableCell align="right">{"$ " + row.price}</TableCell>
+                <TableCell align="right">
+                  {row.discountPercentage + " %"}
+                </TableCell>
                 <TableCell align="left">{row.description}</TableCell>
                 <TableCell align="center">
                   <IconButton onClick={(e) => handleClick(e, row.id)}>
