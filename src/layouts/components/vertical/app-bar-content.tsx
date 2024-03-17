@@ -7,6 +7,8 @@ import { ModeToggler } from "@components/mode-toggler.js";
 import { UserDropdown } from "@components/user-dropdown.js";
 import type { Settings } from "@hooks/use-settings.js";
 import { InputBase } from "@mui/material";
+import { useCommand, useStore } from "@models/store";
+import CartButton from "@components/cart/CartButton";
 
 interface Props {
   readonly hidden: boolean;
@@ -21,6 +23,9 @@ const AppBarContent: FC<Props> = ({
   saveSettings,
   toggleNavVisibility,
 }) => {
+  const [search, dispatch] = useStore((store) => store.search);
+  const command = useCommand((cmd) => cmd.search);
+
   return (
     <Box
       sx={{
@@ -47,7 +52,7 @@ const AppBarContent: FC<Props> = ({
             <Menu2 fontSize="1.5rem" />
           </IconButton>
         ) : null}
-
+        <CartButton />
         <ModeToggler saveSettings={saveSettings} settings={settings} />
       </Box>
       <Box
@@ -71,7 +76,11 @@ const AppBarContent: FC<Props> = ({
           }}
         >
           <Search height={20} width={20} />
-          <InputBase placeholder="Search..."></InputBase>
+          <InputBase
+            value={search}
+            onChange={(e) => dispatch(command.setSearch(e.target.value))}
+            placeholder="Search..."
+          ></InputBase>
         </Box>
         <Box
           sx={{

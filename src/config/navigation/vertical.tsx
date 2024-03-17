@@ -16,18 +16,6 @@ import type { VerticalNavItemsType } from "@layouts/types.js";
 
 export const navigation: readonly VerticalNavItemsType[] = [
   {
-    icon: <ShoppingCart />,
-    id: "cart",
-    link: "/cart",
-    text: "Cart",
-  },
-  // {
-  //   icon: <Pencil />,
-  //   id: 'add',
-  //   link: '/products/add',
-  //   text: 'Add Form'
-  // },
-  {
     icon: <SmartHome />,
     id: "home",
     link: "/home",

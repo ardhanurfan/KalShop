@@ -10,11 +10,19 @@ import { Star } from "@nxweb/icons/tabler";
 import { Product } from "@models/products/types";
 import toTitleCase from "@lib/toTitleCase";
 import { Link } from "react-router-dom";
+import { useCommand, useStore } from "@models/store";
 
 const ProductCard = ({ item }: { item: Product }) => {
+  const [__, dispatch] = useStore((store) => store.search);
+  const command = useCommand((cmd) => cmd.search);
+
   return (
     <Grid item xs={6} md={4} lg={2}>
-      <Link to={`/products/${item.id}`} style={{ textDecoration: "none" }}>
+      <Link
+        onClick={() => dispatch(command.setSearch(""))}
+        to={`/products/${item.id}`}
+        style={{ textDecoration: "none" }}
+      >
         <Card elevation={1} sx={{ height: "100%" }}>
           <CardMedia component="img" height="200" image={item.thumbnail} />
           <CardContent

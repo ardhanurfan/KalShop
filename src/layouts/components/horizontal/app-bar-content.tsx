@@ -7,6 +7,7 @@ import type { Settings } from "@hooks/use-settings.js";
 import { Search } from "@nxweb/icons/tabler";
 import { InputBase } from "@mui/material";
 import { useCommand, useStore } from "@models/store";
+import CartButton from "@components/cart/CartButton";
 
 interface Props {
   readonly saveSettings: (values: Settings) => void;
@@ -39,6 +40,7 @@ const AppBarContent: FC<Props> = ({ settings, saveSettings }) => {
           placeholder="Search..."
         ></InputBase>
       </Box>
+      <CartButton />
       <ModeToggler saveSettings={saveSettings} settings={settings} />
       <UserDropdown settings={settings} />
     </Box>
