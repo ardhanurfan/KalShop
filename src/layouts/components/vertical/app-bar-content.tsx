@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { useEffect, type FC } from "react";
 
 import { Menu2, Search } from "@nxweb/icons/tabler";
 
@@ -25,6 +25,13 @@ const AppBarContent: FC<Props> = ({
 }) => {
   const [search, dispatch] = useStore((store) => store.search);
   const command = useCommand((cmd) => cmd.search);
+
+  const [__, cartDispatch] = useStore((str) => str.cart)
+  const cartCommand = useCommand((cmd) => cmd.cart)
+
+  useEffect(() => {
+    cartDispatch(cartCommand.getCart());
+  }, [])
 
   return (
     <Box

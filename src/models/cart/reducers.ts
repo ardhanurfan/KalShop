@@ -6,6 +6,10 @@ const CartReducers = (
 ): CartModel => {
   switch (action.type) {
     case CartActionType.LOAD_CART:
+      if(state.id != 0) {
+        return state
+      }
+      
       return { ...state, ...action.payload };
     case CartActionType.CLEAR_CART:
       return { id: 0, products: [] };
