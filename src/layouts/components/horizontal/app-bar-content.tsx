@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { useEffect, type FC } from "react";
 
 import { Box } from "@components/material.js";
 import { ModeToggler } from "@components/mode-toggler.js";
@@ -17,6 +17,13 @@ interface Props {
 const AppBarContent: FC<Props> = ({ settings, saveSettings }) => {
   const [search, dispatch] = useStore((store) => store.search);
   const command = useCommand((cmd) => cmd.search);
+
+  const [__, cartDispatch] = useStore((str) => str.cart)
+  const cartCommand = useCommand((cmd) => cmd.cart)
+
+  useEffect(() => {
+    cartDispatch(cartCommand.getCart());
+  }, [])
 
   return (
     <Box sx={{ alignItems: "center", display: "flex" }}>
