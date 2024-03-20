@@ -269,7 +269,7 @@ const Products: PageComponent = () => {
       <Modal open={openDeleteModal} onClose={() => setOpenDeleteModal(false)}>
         <Box
           sx={{
-            backgroundColor: "white",
+            backgroundColor: (theme) => theme.palette.background.default,
             position: "absolute" as "absolute",
             top: "50%",
             left: "50%",
