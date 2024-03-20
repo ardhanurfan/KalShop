@@ -1,5 +1,5 @@
 import type { MouseEvent } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import type { PageComponent } from "@nxweb/react";
 
@@ -18,6 +18,14 @@ const Products: PageComponent = () => {
     dispatch(command.getAllProducts());
   }, []);
 
+  const hotProducts = useMemo(() => {
+    if (!state || !state.products) {
+      return [];
+    }
+
+    return [...state.products].filter((product) => product.rating > 4.8);
+  }, [state]);
+
   return (
     <>
       <Box sx={{ textAlign: "center", justifyContent: "center", mb: 8 }}>
@@ -33,7 +41,7 @@ const Products: PageComponent = () => {
           <ProductCard key={product.id} item={product} />
         ))}
       </Grid>
-      <Box sx={{ marginTop: "64px" }}>
+      <Box sx={{ marginTop: "64px", marginBottom: 8 }}>
         <Typography component="h1" variant="h1">
           Lagi laris manies
         </Typography>
@@ -41,18 +49,11 @@ const Products: PageComponent = () => {
           bingung pengen checkout apa? coba liat barang disini
         </Typography>
       </Box>
-      <Box
-        py={2}
-        px={4}
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          justifyContent: "flex-start",
-        }}
-      >
-        <ProductHot />
-      </Box>
+      <Grid container spacing={4}>
+        {hotProducts.map((product) => (
+          <ProductHot product={product} />
+        ))}
+      </Grid>
     </>
   );
 };

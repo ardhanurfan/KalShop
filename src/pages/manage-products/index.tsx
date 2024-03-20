@@ -34,6 +34,7 @@ import {
 } from "@mui/material";
 import { Product } from "@models/products/types";
 import toTitleCase from "@lib/toTitleCase";
+import toast from "react-hot-toast";
 
 const Products: PageComponent = () => {
   const navigate = useNavigate();
@@ -141,12 +142,14 @@ const Products: PageComponent = () => {
       });
       setSelected([]);
       setOpenDeleteModal(false);
+      toast.success("Delete products success");
       return;
     }
     if (id) {
       dispatch(command.deleteProduct(id));
       handleClose();
       setOpenDeleteModal(false);
+      toast.success("Delete product success");
     }
   };
 

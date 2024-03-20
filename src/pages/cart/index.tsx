@@ -10,7 +10,6 @@ import {
 import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 
 import EmptyCart from "@components/cart/EmptyCart";
 import CartItem from "@components/cart/CartItem";
@@ -204,7 +203,6 @@ const Cart = () => {
                 <Button variant="contained" onClick={orderPlaced}>
                   Place Order
                 </Button>
-                <Toaster />
               </Box>
             </Box>
           </>

@@ -10,6 +10,7 @@ import { routes } from "@config/routes.js";
 import { StoreProvider } from "@models/store.js";
 
 import App from "./_app.js";
+import { Toaster } from "react-hot-toast";
 
 if (process.env.NODE_ENV === "production") {
   disableReactDevTools();
@@ -28,12 +29,13 @@ root.render(
       routes={routes}
       wrapper={App}
     />
+    <Toaster />
 
-    <Toast.Container
+    {/* <Toast.Container
       closeOnClick={true}
       draggable={false}
       pauseOnFocusLoss={false}
-    />
+    /> */}
   </StoreProvider>
 );
 

@@ -8,7 +8,7 @@ import { useCommand, useStore } from "@models/store.js";
 import { Typography, Button, Box, TextField } from "@mui/material";
 import { Star } from "@nxweb/icons/tabler";
 import { CartItem } from "@models/cart/types";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const Product: PageComponent = () => {
   const navigate = useNavigate();
@@ -65,9 +65,22 @@ const Product: PageComponent = () => {
   return (
     <>
       <Box
-        sx={{ display: "flex", flexDirection: "row", justifyContent: "center" }}
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        <img style={{ width: "30%" }} src={product?.thumbnail} />
+        <img
+          style={{
+            width: "30%",
+            height: "300px",
+            borderRadius: "12px",
+            objectFit: "cover",
+          }}
+          src={product?.thumbnail}
+        />
 
         <Box sx={{ marginLeft: "16px" }}>
           <Typography
@@ -114,7 +127,6 @@ const Product: PageComponent = () => {
             />
             <Button style={{}} variant="contained" onClick={handleAddCart}>
               Add to Cart
-              <Toaster />
             </Button>
           </Box>
         </Box>

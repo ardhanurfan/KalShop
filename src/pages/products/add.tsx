@@ -13,7 +13,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useDropzone } from "react-dropzone";
 import { Upload } from "@nxweb/icons/tabler";
 import { useCommand, useStore } from "@models/store";
@@ -380,7 +380,6 @@ const AddForm = () => {
               <Button type="submit" variant="contained">
                 Submit
               </Button>
-              <Toaster />
             </Grid>
           </Grid>
         </form>

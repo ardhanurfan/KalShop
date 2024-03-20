@@ -129,11 +129,7 @@ const UserDropdown: FC<Props> = ({ settings }) => {
               badgeContent={<BadgeContentSpan />}
               overlap="circular"
             >
-              <Avatar
-                alt="John Doe"
-                src="/images/avatars/1.png"
-                sx={{ height: "2.5rem", width: "2.5rem" }}
-              />
+              <Avatar alt="User" sx={{ height: "2.5rem", width: "2.5rem" }} />
             </Badge>
             <Box
               sx={{
