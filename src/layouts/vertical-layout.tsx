@@ -16,6 +16,7 @@ import { VerticalAppBar } from "./components/vertical/app-bar.js";
 import { Navigation } from "./components/vertical/navigation.js";
 import { useStore } from "@models/store.js";
 import SearchPage from "@pages/_search-page/index.js";
+import { HorizontalLayout } from "./horizontal-layout.js";
 
 const VerticalLayoutWrapper = styled("div")({
   display: "flex",
@@ -73,68 +74,72 @@ const VerticalLayout: FC<VerticalLayoutProps> = (props) => {
 
   return (
     <>
-      <VerticalLayoutWrapper className="layout-wrapper">
-        {/* Navigation Menu */}
-        {navHidden &&
-        !(navHidden && settings.lastLayout === "vertical") ? null : (
-          <Navigation
-            afterNavMenuContent={verticalLayoutProps.navMenu.afterContent}
-            beforeNavMenuContent={verticalLayoutProps.navMenu.beforeContent}
-            collapsedNavWidth={collapsedNavWidth}
-            menuLockedIcon={verticalLayoutProps.navMenu.lockedIcon}
-            menuUnlockedIcon={verticalLayoutProps.navMenu.unlockedIcon}
-            navMenuBranding={verticalLayoutProps.navMenu.branding}
-            navMenuContent={verticalLayoutProps.navMenu.content}
-            navMenuProps={verticalLayoutProps.navMenu.componentProps}
-            navVisible={navVisible}
-            navWidth={navWidth}
-            navigationBorderWidth={navigationBorderWidth}
-            setNavVisible={setNavVisible}
-            toggleNavVisibility={toggleNavVisibility}
-            verticalNavItems={verticalLayoutProps.navMenu.navItems}
-            {...props}
-          />
-        )}
-        <MainContentWrapper
-          className="layout-content-wrapper"
-          sx={{ ...(contentHeightFixed && { maxHeight: "100vh" }) }}
-        >
-          {/* AppBar Component */}
-          <VerticalAppBar
-            appBarContent={verticalLayoutProps.appBar?.content}
-            appBarProps={verticalLayoutProps.appBar?.componentProps}
-            toggleNavVisibility={toggleNavVisibility}
-            {...props}
-          />
-
-          {/* Content */}
-          <ContentWrapper
-            className="layout-page-content"
-            sx={{
-              ...(contentHeightFixed && {
-                overflow: "hidden",
-
-                "& > :first-of-type": { height: "100%" },
-              }),
-              ...(contentWidth === "boxed" && {
-                mx: "auto",
-
-                "@media (min-width:1200px)": { maxWidth: "100%" },
-                "@media (min-width:1440px)": { maxWidth: 1440 },
-              }),
-            }}
+      {!hidden ? (
+        <HorizontalLayout {...props} />
+      ) : (
+        <VerticalLayoutWrapper className="layout-wrapper">
+          {/* Navigation Menu */}
+          {navHidden &&
+          !(navHidden && settings.lastLayout === "vertical") ? null : (
+            <Navigation
+              afterNavMenuContent={verticalLayoutProps.navMenu.afterContent}
+              beforeNavMenuContent={verticalLayoutProps.navMenu.beforeContent}
+              collapsedNavWidth={collapsedNavWidth}
+              menuLockedIcon={verticalLayoutProps.navMenu.lockedIcon}
+              menuUnlockedIcon={verticalLayoutProps.navMenu.unlockedIcon}
+              navMenuBranding={verticalLayoutProps.navMenu.branding}
+              navMenuContent={verticalLayoutProps.navMenu.content}
+              navMenuProps={verticalLayoutProps.navMenu.componentProps}
+              navVisible={navVisible}
+              navWidth={navWidth}
+              navigationBorderWidth={navigationBorderWidth}
+              setNavVisible={setNavVisible}
+              toggleNavVisibility={toggleNavVisibility}
+              verticalNavItems={verticalLayoutProps.navMenu.navItems}
+              {...props}
+            />
+          )}
+          <MainContentWrapper
+            className="layout-content-wrapper"
+            sx={{ ...(contentHeightFixed && { maxHeight: "100vh" }) }}
           >
-            {search == "" ? children : <SearchPage />}
-          </ContentWrapper>
+            {/* AppBar Component */}
+            <VerticalAppBar
+              appBarContent={verticalLayoutProps.appBar?.content}
+              appBarProps={verticalLayoutProps.appBar?.componentProps}
+              toggleNavVisibility={toggleNavVisibility}
+              {...props}
+            />
 
-          {/* Footer Component */}
-          <Footer
-            footerContent={footerProps?.content}
-            footerStyles={footerProps?.sx}
-            {...props}
-          />
-        </MainContentWrapper>
-      </VerticalLayoutWrapper>
+            {/* Content */}
+            <ContentWrapper
+              className="layout-page-content"
+              sx={{
+                ...(contentHeightFixed && {
+                  overflow: "hidden",
+
+                  "& > :first-of-type": { height: "100%" },
+                }),
+                ...(contentWidth === "boxed" && {
+                  mx: "auto",
+
+                  "@media (min-width:1200px)": { maxWidth: "100%" },
+                  "@media (min-width:1440px)": { maxWidth: 1440 },
+                }),
+              }}
+            >
+              {search == "" ? children : <SearchPage />}
+            </ContentWrapper>
+
+            {/* Footer Component */}
+            <Footer
+              footerContent={footerProps?.content}
+              footerStyles={footerProps?.sx}
+              {...props}
+            />
+          </MainContentWrapper>
+        </VerticalLayoutWrapper>
+      )}
 
       {/* Customizer */}
       {disableCustomizer || hidden ? null : <Customizer />}

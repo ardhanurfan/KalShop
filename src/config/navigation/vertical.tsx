@@ -34,6 +34,10 @@ export const navigation: readonly VerticalNavItemsType[] = [
     text: "History",
   },
   {
+    section: "Administrator",
+    id: "administrator",
+  },
+  {
     icon: <Packages />,
     id: "manage-products",
     link: "/manage-products",
