@@ -10,5 +10,5 @@
       "use": "@vercel/static"
     }
   ],
-  "public": "dist"
+  "outputDirectory": "dist"
 }
