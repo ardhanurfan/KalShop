@@ -5,7 +5,13 @@ import type { PageComponent } from "@nxweb/react";
 
 import { Chip } from "@components/material.js";
 import { useCommand, useStore } from "@models/store.js";
-import { Typography, Button, Box, TextField } from "@mui/material";
+import {
+  Typography,
+  Button,
+  Box,
+  TextField,
+  OutlinedInput,
+} from "@mui/material";
 import { Star } from "@nxweb/icons/tabler";
 import { CartItem } from "@models/cart/types";
 import toast from "react-hot-toast";
@@ -19,7 +25,7 @@ const Product: PageComponent = () => {
   const command = useCommand((cmd) => cmd.products);
   const [__, cartDispatch] = useStore((store) => store.cart);
   const cartCommand = useCommand((cmd) => cmd.cart);
-  const [qty, setQty] = useState<number>(0);
+  const [qty, setQty] = useState<number>(1);
 
   const handleQtyChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQty(+e.target.value);
@@ -72,16 +78,23 @@ const Product: PageComponent = () => {
           alignItems: "center",
         }}
       >
-        <img
-          style={{
-            width: "30%",
+        <Box
+          sx={{
+            width: { xs: "70%", md: "30%" },
             height: "300px",
-            borderRadius: "12px",
-            objectFit: "cover",
+            mb: { xs: 2, md: 0 },
           }}
-          src={product?.thumbnail}
-        />
-
+        >
+          <img
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "12px",
+              objectFit: "cover",
+            }}
+            src={product?.thumbnail}
+          />
+        </Box>
         <Box sx={{ marginLeft: "16px" }}>
           <Typography
             component="h1"
@@ -115,24 +128,19 @@ const Product: PageComponent = () => {
 
           <Box display="flex" flexDirection="row" marginTop="54px">
             <TextField
-              id="filled-number"
-              label="Quantity"
+              label="Qty"
               type="number"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="filled"
-              style={{ width: "150px", marginRight: "32px" }}
+              defaultValue={1}
+              InputProps={{ inputProps: { min: 1, max: 20, step: 1 } }}
+              sx={{ width: "100px", mr: 2 }}
               onChange={handleQtyChange}
             />
-            <Button style={{}} variant="contained" onClick={handleAddCart}>
+            <Button variant="contained" onClick={handleAddCart}>
               Add to Cart
             </Button>
           </Box>
         </Box>
       </Box>
-
-      {/* <pre>{product ? JSON.stringify(product, null, 2) : null}</pre> */}
     </>
   );
 };

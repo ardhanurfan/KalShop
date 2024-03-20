@@ -22,6 +22,7 @@ import { useCommand, useStore } from "@models/store.js";
 import {
   Box,
   Button,
+  Card,
   Checkbox,
   InputAdornment,
   Modal,
@@ -311,7 +312,7 @@ const Products: PageComponent = () => {
           </Box>
         </Box>
       </Modal>
-      <TableContainer component={Paper}>
+      <Card>
         <Box
           sx={{
             display: "flex",
@@ -373,115 +374,120 @@ const Products: PageComponent = () => {
             Product
           </Button>
         </Box>
-        <Table sx={{ minWidth: 650 }}>
-          <TableHead>
-            <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  color="primary"
-                  indeterminate={
-                    selected.length > 0 &&
-                    selected.length < productsFiltered.length
-                  }
-                  checked={
-                    productsFiltered.length > 0 &&
-                    productsFiltered.length === selected.length
-                  }
-                  onChange={handleSelectAllClick}
-                  inputProps={{
-                    "aria-label": "select all desserts",
-                  }}
-                />
-              </TableCell>
-              {headCells.map((headCell) => (
-                <TableCell
-                  key={headCell.id}
-                  align={headCell.numeric ? "right" : "left"}
-                  padding={headCell.disablePadding ? "none" : "normal"}
-                  sortDirection={orderBy === headCell.id ? order : false}
-                >
-                  <TableSortLabel
-                    hideSortIcon={
-                      headCell.id === "action" || headCell.id === "thumbnail"
-                    }
-                    active={orderBy === headCell.id}
-                    direction={orderBy === headCell.id ? order : "asc"}
-                    onClick={() => {
-                      if (
-                        headCell.id !== "action" &&
-                        headCell.id != "thumbnail"
-                      ) {
-                        setOrder(order === "asc" ? "desc" : "asc");
-                        setOrderBy(headCell.id);
-                      }
-                    }}
-                    sx={{ display: "flex", alignItems: "center" }}
-                  >
-                    {headCell.label}
-                  </TableSortLabel>
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {products.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{
-                  "&:last-child td, &:last-child th": {
-                    border: 0,
-                  },
-                  backgroundColor:
-                    id === row.id ? theme.palette.divider : "inherit",
-                }}
-              >
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }}>
+            <TableHead>
+              <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
                     color="primary"
-                    checked={selected.indexOf(row.id) !== -1}
+                    indeterminate={
+                      selected.length > 0 &&
+                      selected.length < productsFiltered.length
+                    }
+                    checked={
+                      productsFiltered.length > 0 &&
+                      productsFiltered.length === selected.length
+                    }
+                    onChange={handleSelectAllClick}
                     inputProps={{
-                      "aria-labelledby": row.id.toString(),
+                      "aria-label": "select all desserts",
                     }}
-                    onClick={(event) => handleSelect(event, row.id)}
                   />
                 </TableCell>
-                <TableCell component="th" scope="row" align="right">
-                  {row.id}
-                </TableCell>
-                <TableCell align="left">{row.title}</TableCell>
-                <TableCell align="left">{row.brand}</TableCell>
-                <TableCell align="left">{toTitleCase(row.category)}</TableCell>
-                <TableCell align="left">
-                  <img
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      objectFit: "cover",
-                      borderRadius: "8px",
-                    }}
-                    src={row.thumbnail}
-                    alt={row.title}
-                  />
-                </TableCell>
-                <TableCell align="right">{row.stock}</TableCell>
-                <TableCell align="right">{"$ " + row.price}</TableCell>
-                <TableCell align="right">
-                  {row.discountPercentage + " %"}
-                </TableCell>
-                <TableCell align="left">{row.description}</TableCell>
-                <TableCell align="center">
-                  <IconButton onClick={(e) => handleClick(e, row.id)}>
-                    <DotsVertical />
-                  </IconButton>
-                </TableCell>
+                {headCells.map((headCell) => (
+                  <TableCell
+                    key={headCell.id}
+                    align={headCell.numeric ? "right" : "left"}
+                    padding={headCell.disablePadding ? "none" : "normal"}
+                    sortDirection={orderBy === headCell.id ? order : false}
+                  >
+                    <TableSortLabel
+                      hideSortIcon={
+                        headCell.id === "action" || headCell.id === "thumbnail"
+                      }
+                      active={orderBy === headCell.id}
+                      direction={orderBy === headCell.id ? order : "asc"}
+                      onClick={() => {
+                        if (
+                          headCell.id !== "action" &&
+                          headCell.id != "thumbnail"
+                        ) {
+                          setOrder(order === "asc" ? "desc" : "asc");
+                          setOrderBy(headCell.id);
+                        }
+                      }}
+                      sx={{ display: "flex", alignItems: "center" }}
+                    >
+                      {headCell.label}
+                    </TableSortLabel>
+                  </TableCell>
+                ))}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>
+              {products.map((row) => (
+                <TableRow
+                  key={row.id}
+                  sx={{
+                    "&:last-child td, &:last-child th": {
+                      border: 0,
+                    },
+                    backgroundColor:
+                      id === row.id ? theme.palette.divider : "inherit",
+                  }}
+                >
+                  <TableCell padding="checkbox">
+                    <Checkbox
+                      color="primary"
+                      checked={selected.indexOf(row.id) !== -1}
+                      inputProps={{
+                        "aria-labelledby": row.id.toString(),
+                      }}
+                      onClick={(event) => handleSelect(event, row.id)}
+                    />
+                  </TableCell>
+                  <TableCell component="th" scope="row" align="right">
+                    {row.id}
+                  </TableCell>
+                  <TableCell align="left">{row.title}</TableCell>
+                  <TableCell align="left">{row.brand}</TableCell>
+                  <TableCell align="left">
+                    {toTitleCase(row.category)}
+                  </TableCell>
+                  <TableCell align="left">
+                    <img
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                      }}
+                      src={row.thumbnail}
+                      alt={row.title}
+                    />
+                  </TableCell>
+                  <TableCell align="right">{row.stock}</TableCell>
+                  <TableCell align="right">{"$ " + row.price}</TableCell>
+                  <TableCell align="right">
+                    {row.discountPercentage + " %"}
+                  </TableCell>
+                  <TableCell align="left">{row.description}</TableCell>
+                  <TableCell align="center">
+                    <IconButton onClick={(e) => handleClick(e, row.id)}>
+                      <DotsVertical />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
         {state && state.products && (
           <Box
             sx={{
               display: "flex",
+              flexDirection: { xs: "column", lg: "row" },
               justifyContent: "space-between",
               alignItems: "center",
               padding: 4,
@@ -523,7 +529,7 @@ const Products: PageComponent = () => {
             />
           </Box>
         )}
-      </TableContainer>
+      </Card>
       <Menu
         anchorEl={anchorEl}
         id="basic-menu"
