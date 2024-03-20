@@ -50,7 +50,7 @@ const FooterContent = () => {
         </Box>
         by
         <Typography component={StyledCompanyName} sx={{ ml: 1 }} target="_blank" to="https://pixinvent.com">
-          Pixinvent
+          KalShop
         </Typography>
       </Typography>
       {hidden

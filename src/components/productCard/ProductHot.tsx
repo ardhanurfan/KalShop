@@ -56,29 +56,31 @@ const ProductHot = ({ product }: { product: Product }) => {
               paddingRight: 3,
             }}
           >
-            <Typography
-              variant="h5"
-              component={"h5"}
-              fontWeight={500}
-              fontSize={16}
-            >
-              {product.title}
-            </Typography>
-            <Typography
-              variant="h5"
-              component={"h5"}
-              fontSize={12}
-              color={(theme) => theme.palette.grey[500]}
-            >
-              {toTitleCase(product.category)}
-            </Typography>
-            <Typography
-              variant="h4"
-              component={"h4"}
-              color={(theme) => theme.palette.primary.main}
-            >
-              {"$" + product.price}
-            </Typography>
+            <Box sx={{ height: "50px" }}>
+              <Typography
+                variant="h5"
+                component={"h5"}
+                fontWeight={500}
+                fontSize={16}
+              >
+                {product.title}
+              </Typography>
+              <Typography
+                variant="h5"
+                component={"h5"}
+                fontSize={12}
+                color={(theme) => theme.palette.grey[500]}
+              >
+                {toTitleCase(product.category)}
+              </Typography>
+              <Typography
+                variant="h4"
+                component={"h4"}
+                color={(theme) => theme.palette.primary.main}
+              >
+                {"$" + product.price}
+              </Typography>
+            </Box>
             <Box
               sx={{
                 display: "flex",
